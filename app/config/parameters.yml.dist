@@ -3,7 +3,7 @@
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
     host: 127.0.0.1
-    path: "%kernel.root_dir%/db.db3"
+    path: "%kernel.root_dir%/alm.db3"
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt

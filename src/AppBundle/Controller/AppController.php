@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Shorturl;
+use AppBundle\Form\ShorturlType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,6 +38,10 @@ class AppController extends Controller
     {
 
         //get form
+        $short = new Shorturl();
+
+        $form = $this->createForm(ShorturlType::class, $short);
+
 
         //si form soumis
             // si ok
