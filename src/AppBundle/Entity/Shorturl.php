@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Shorturl
@@ -14,42 +13,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Shorturl
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Assert\NotBlank()
      */
     private $id;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="longUrl", length="255")
-     * @ORM\longUrl
-     * @Assert\NotBlank()
+     * @ORM\Column(name="url", type="string", length=500, nullable=false)
      */
-    private $longUrl;
+    private $url;
 
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="shortCode", length="6")
-     * @ORM\shortCode
-     * @Assert\NotBlank()
+     * @ORM\Column(name="code", type="string", length=6, nullable=false)
      */
-    private $shortCode;
+    private $code;
 
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="createdAt", type="integer")
-     * @ORM\createdAt
-     * @Assert\NotBlank()
-     * @Assert\Type("\DateTime")
+     * @ORM\Column(name="created_at", type="integer", nullable=false)
      */
     private $createdAt;
 
@@ -64,33 +51,79 @@ class Shorturl
         return $this->id;
     }
 
+
     /**
-     * Get longUrl
+     * [setId description]
+     * @param [type] $id [description]
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+
+    /**
+     * Get Url
      *
      * @return string
      */
-    public function getLongUrl()
+    public function getUrl()
     {
-        return $this->longUrl;
+        return $this->url;
+    }
+
+    /**
+     * [setUrl description]
+     * @param [type] $this->url [description]
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
     }
 
      /**
-     * Get longUrl
+     * Get code
      *
      * @return string
      */
-    public function getShortCode()
+    public function getCode()
     {
-        return $this->shortCode;
+        return $this->code;
+    }
+
+    /**
+     * [setCode description]
+     * @param [type] $code [description]
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
      /**
-     * Get longUrl
+     * Get screatedAt
      *
      * @return string
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * [setCreatedAt description]
+     * @param [type] $ceratedAt [description]
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 }
