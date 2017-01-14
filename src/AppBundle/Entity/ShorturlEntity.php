@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Shorturl
@@ -23,6 +25,8 @@ class ShorturlEntity
     /**
      *
      * @ORM\Column(name="url", type="string", length=500, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Url()
      */
     private $url;
 
