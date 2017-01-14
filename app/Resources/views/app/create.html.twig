@@ -2,8 +2,23 @@
 
 {% block body %}
 
+{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+
 {{ form_start(form) }}
-{{ form_widget(form) }}
+
+    <div>
+    {{ form_errors(form) }}
+    </div>
+    <div>
+        {{ form_label(form.url) }}
+        {{ form_widget(form.url) }}
+    </div>
+
+    <div>
+        {{ form_widget(form.save) }}
+    </div>
+
 {{ form_end(form) }}
 
 {% endblock %}

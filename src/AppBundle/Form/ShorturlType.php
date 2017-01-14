@@ -6,7 +6,7 @@ use AppBundle\Entity\ShorturlEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
@@ -21,9 +21,12 @@ class ShorturlType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        	->add('url', UrlType::class, [
-                'label' => 'Enter your url'])
-            ->add('Generate little link', SubmitType::class)
+        	->add('url', TextType::class, [
+                'label' => 'Enter your url',
+                'attr' => ['placeholder' => 'https://www.alittlemarket.com/']
+                ]
+            )
+            ->add('save', SubmitType::class, ['label' => 'Generate little link'])
         ;
     }
 
