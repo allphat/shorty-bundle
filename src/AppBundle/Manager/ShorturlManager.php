@@ -3,12 +3,10 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Repository\ShorturlRepository;
+use AppBundle\Shortener\Shortener;
 
 class ShorturlManager
 {
-	const DICO = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	const MAX_SIZE = 6;
-
 	private $repository;
 
 	/**
@@ -17,7 +15,6 @@ class ShorturlManager
 	public function __construct(ShorturlRepository $repository)
 	{
 		$this->repository = $repository;
-		$this->dico = str_split(self::DICO);
 	}
 
 
@@ -36,6 +33,7 @@ class ShorturlManager
 	 */
 	public function save($short)
 	{
+		$short->setCode($this->encode());
 		$this->repository->save($short);
 	}
 
@@ -47,14 +45,7 @@ class ShorturlManager
 	 */
 	public function encode()
 	{
-		$i = self::MAX_SIZE;
-		$return = '';
-		while ($i > 0) {
-			$return .= $this->dico[rand(0, count($this->dico))];
-			$i--;	
-		}
-
-		return $return;
+		return Shortener::generateLittleCode();
 	}
 
 }

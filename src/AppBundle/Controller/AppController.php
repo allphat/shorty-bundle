@@ -38,11 +38,11 @@ class AppController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+    
             $manager = $this->get('app_manager');
+    
             $short = $form->getData();
-            $short->setCode($manager->encode());
             $short->setCreatedAt((new \DateTime())->getTimestamp());
-            
             $manager->save($short);            
 
              $this->addFlash('success', 'Shorten url created: ' . $short->getCode());
