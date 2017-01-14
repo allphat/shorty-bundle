@@ -21,8 +21,9 @@ class ShorturlType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        	->add('url', UrlType::class)
-            ->add('save', SubmitType::class)
+        	->add('url', UrlType::class, [
+                'label' => 'Enter your url'])
+            ->add('Generate little link', SubmitType::class)
         ;
     }
 
