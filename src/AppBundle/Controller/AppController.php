@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Shorturl;
+use AppBundle\Entity\ShorturlEntity;
 use AppBundle\Manager\ShorturlManager;
 use AppBundle\Form\ShorturlType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,14 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 class AppController extends Controller
 {
     /**
-     * @Route("/{id}", name="redir", requirements={"id"= "^[\w]{6}$"})
+     * @Route("/{code}", name="redir", requirements={"code"= "^[\w]{6}$"})
      * @Method({"GET","HEAD"})
      */
-    public function redirectAction($id)
+    public function redirectAction($code)
     {
-        $short = $this->getDoctrine()
-            ->getRepository('AppBundle:Shorturl')
-            ->findByCode($id)[0];
+        $short = $this->get('app_manager')->findByCode($id);
+
         if (!$short) {
             throw $this->createNotFoundException('Oopps this link does does not exist');
         }
@@ -34,10 +33,7 @@ class AppController extends Controller
      */
     public function createAction(Request $request)
     {
-
-        $short = new Shorturl();
-
-        $form = $this->createForm(ShorturlType::class, $short);
+        $form = $this->createForm(ShorturlType::class, new ShorturlEntity());
 
         $form->handleRequest($request);
 
@@ -47,10 +43,7 @@ class AppController extends Controller
             $short->setCode($manager->encode());
             $short->setCreatedAt((new \DateTime())->getTimestamp());
             
-
-             $em = $this->getDoctrine()->getManager();
-             $em->persist($short);
-             $em->flush();
+            $manager->save($short);            
 
              $this->addFlash('success', 'Shorten url created: ' . $short->getCode());
         }

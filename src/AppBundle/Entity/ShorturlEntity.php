@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shorturl")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ShorturlRepository")
  */
-class Shorturl
+class ShorturlEntity
 {
     /**
      *
@@ -76,7 +76,7 @@ class Shorturl
 
     /**
      * [setUrl description]
-     * @param [type] $this->url [description]
+     * @param [type] $url [description]
      */
     public function setUrl($url)
     {

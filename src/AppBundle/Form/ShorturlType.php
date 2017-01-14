@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Shorturl;
+use AppBundle\Entity\ShorturlEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -34,7 +34,7 @@ class ShorturlType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 	    $resolver->setDefaults(
-	    	['data_class' => Shorturl::class]
+	    	['data_class' => ShorturlEntity::class]
 	    );
 	}
 	/**
