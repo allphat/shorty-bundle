@@ -4,6 +4,13 @@ parameters:
 #    parameter_name: value
 
 services:
+    #arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app_repository:
+        class: AppBundle\Repository\ShorturlRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: [ AppBundle\Entity\ShorturlEntity ]
+    
     app_manager:
         class: AppBundle\Manager\ShorturlManager
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+        arguments: ["@app_repository"]
+        
