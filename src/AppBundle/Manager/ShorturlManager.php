@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\ShorturlEntity;
 use AppBundle\Repository\ShorturlRepository;
 use AppBundle\Shortener\Shortener;
 
@@ -28,10 +29,10 @@ class ShorturlManager
 	}
 
 	/**
-	 * @param  ShorturlEntity $short
+	 * @param  ShorturlEntity  $short
 	 * @return [type]        [description]
 	 */
-	public function save($short)
+	public function save(ShorturlEntity $short)
 	{
 		$short->setCode($this->encode());
 		$this->repository->save($short);
