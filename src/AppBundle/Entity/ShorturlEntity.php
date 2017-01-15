@@ -33,7 +33,7 @@ class ShorturlEntity
 
     /**
      *
-     * @ORM\Column(name="code", type="string", length=6, nullable=false)
+     * @ORM\Column(name="code", type="string", length=6, nullable=false, unique=true)
      */
     private $code;
 

@@ -16,7 +16,7 @@ class ShorturlRepository extends EntityRepository
 {
     /**
      * persists links in db
-     * 
+     *
      * @param  ShorturlEntity $short [description]
      * @return [type]                [description]
      */

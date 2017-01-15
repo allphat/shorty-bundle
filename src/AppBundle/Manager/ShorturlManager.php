@@ -37,10 +37,10 @@ class ShorturlManager
 		$this->repository->save($short);
 	}
 
-  
+
 	/**
 	 * creates a 6 characters string
-	 * 
+	 *
 	 * @return string
 	 */
 	public function encode()
