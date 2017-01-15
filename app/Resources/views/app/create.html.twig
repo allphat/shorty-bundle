@@ -2,28 +2,59 @@
 
 {% block body %}
 
-{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="jumbotron">
+        <h1>Litte Url Shortener</h1>
 
-
-<h1>URL SHORTENER</h1>
-
-<h2>Create your short link</h2>
-
-<div>
-{{ form_start(form) }}
-
-    <div>
-    {{ form_errors(form) }}
-    </div>
-    <div>
-        {{ form_label(form.url) }}
-        {{ form_widget(form.url) }}
+        <p>Enter your url to be minified in the form. Click on "Generate my little link". A short url will appear in the green box. Et voila! :)</p>
     </div>
 
-    <div>
-        {{ form_widget(form.save) }}
-    </div>
+    {% use 'form_div_layout.html.twig' %}
 
-{{ form_end(form) }}
-</div>
+    {% form_theme form _self %}
+
+
+    {% block content %}
+
+
+        <div class="row">
+
+            <form name="shorturl" class="form-horizontal" role="form " method="post" novalidate="novalidate" style="font-size:24px">
+                {{ form_errors(form.url)}}
+                {{ form_errors(form._token)}}
+
+
+                <div class="form-group">
+                    <div class="col-xs-6 col-md-4">
+                        <label for="shorturl_url" class="">
+                            <span>Enter your url</span>
+                            <span class="required" title="This field is required">*</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <input type="text" id="shorturl_url" name="shorturl[url]" class="form-control input-normal" required="required" placeholder="https://www.alittlemarket.com/">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button type="submit" class="btn btn-lg btn-success" id="shorturl_save" name="shorturl[save]">Generate little link</button>
+                    </div>
+                </div>
+                {{ form_widget(form._token) }}
+            </form>
+        </div>
+    {% endblock %}
+
 {% endblock %}
+
+{# form_errors.html.twig #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <ul>
+            {% for error in errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

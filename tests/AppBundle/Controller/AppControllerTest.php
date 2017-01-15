@@ -13,18 +13,20 @@ class AppControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('URL SHORTENER', $crawler->filter('h1')->text());
+        $this->assertContains('Litte Url Shortener', $crawler->filter('h1')->text());
 
         $form = $crawler->selectButton('Generate little link')->form();
 
         $form->setValues(['shorturl' => ['url' => 'http://test.com']]);
-       
+
         $crawler = $client->submit($form);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-                
-        $this->assertContains('Shorten url created:', $crawler->filter('div')->text());
+
+        $this->assertContains('Short url created:', $crawler->filter('div')->text());
 
 
+       $info = $crawler->filter('a');
+       $link = $info->html();
     }
 }
