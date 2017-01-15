@@ -46,3 +46,10 @@ Nice to have
 - Counter implementations is naive. Maybe we can parse server logs to gather data and implements counter?
 
 - depending on links to be generated, visits to link, need to think about some cache strategies (sql + server)
+
+- I would move app templates in bundle, apply proper theming to get rid of custom error management if form template
+
+=============== 
+
+[![Build Status](https://travis-ci.org/alphatesla/shorty.svg?branch=master)](https://travis-ci.org/alphatesla/shorty)
+
