@@ -42,4 +42,20 @@ class ShorturlManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertRegExp('/[\w]{6}/', $short->getCode());
     }
+
+    public function testUpdateCounter()
+    {
+        $short = new ShorturlEntity();
+
+        $this->repository->expects($this->once())
+            ->method('save')
+            ->with($short);
+
+        $this->assertEquals(0, $short->getCounter());
+
+        $this->manager->updateCounter($short);
+
+        $this->assertEquals(1, $short->getCounter());
+
+    }
 }

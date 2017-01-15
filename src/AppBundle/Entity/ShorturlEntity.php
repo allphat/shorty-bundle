@@ -37,6 +37,11 @@ class ShorturlEntity
      */
     private $code;
 
+    /**
+     * @ORM\Column(name="counter", type="integer", nullable=false, options={"unsigned":true, "default":0})
+     */
+    private $counter;
+
 
     /**
      *
@@ -57,8 +62,7 @@ class ShorturlEntity
 
 
     /**
-     * [setId description]
-     * @param [type] $id [description]
+     * @param integer $id
      */
     public function setId($id)
     {
@@ -79,8 +83,7 @@ class ShorturlEntity
     }
 
     /**
-     * [setUrl description]
-     * @param [type] $url [description]
+     * @param string $url
      */
     public function setUrl($url)
     {
@@ -89,7 +92,7 @@ class ShorturlEntity
         return $this;
     }
 
-     /**
+    /**
      * Get code
      *
      * @return string
@@ -100,8 +103,7 @@ class ShorturlEntity
     }
 
     /**
-     * [setCode description]
-     * @param [type] $code [description]
+     * @param string $code
      */
     public function setCode($code)
     {
@@ -110,10 +112,30 @@ class ShorturlEntity
         return $this;
     }
 
-     /**
-     * Get screatedAt
+    /**
+     * Get code
      *
-     * @return string
+     * @return integer
+     */
+    public function getCounter()
+    {
+        return $this->counter;
+    }
+
+    /**
+     * @param integer $counter
+     */
+    public function setCounter($counter)
+    {
+        $this->counter = $counter;
+
+        return $this;
+    }
+
+     /**
+     * Get createdAt
+     *
+     * @return integer
      */
     public function getCreatedAt()
     {
@@ -121,8 +143,7 @@ class ShorturlEntity
     }
 
     /**
-     * [setCreatedAt description]
-     * @param [type] $ceratedAt [description]
+     * @param integer $createdAt
      */
     public function setCreatedAt($createdAt)
     {

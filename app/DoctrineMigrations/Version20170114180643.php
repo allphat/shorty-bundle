@@ -18,7 +18,7 @@ class Version20170114180643 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('CREATE TABLE shorturl (id INTEGER NOT NULL, url VARCHAR(500) NOT NULL, code VARCHAR(6) NOT NULL, created_at INTEGER NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE shorturl (id INTEGER NOT NULL, url VARCHAR(500) NOT NULL, code VARCHAR(6) NOT NULL, counter INTEGER UNSIGNED NOT NULL DEFAULT 0, created_at INTEGER NOT NULL, PRIMARY KEY(id))');
     }
 
     /**
