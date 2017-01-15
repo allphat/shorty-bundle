@@ -13,10 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShorturlType extends AbstractType
 {
 	/**
-	 * [buildForm description]
-	 * @param  FormBuilderInterface $builder [description]
-	 * @param  array                $options [description]
-	 * @return [type]                        [description]
+	 * @param  FormBuilderInterface $builder
+	 * @param  array                $options
 	 */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,9 +29,7 @@ class ShorturlType extends AbstractType
     }
 
     /**
-     * [configureOptions description]
-     * @param  OptionsResolver $resolver [description]
-     * @return [type]                    [description]
+     * @param  OptionsResolver $resolver
      */
 	public function configureOptions(OptionsResolver $resolver)
 	{

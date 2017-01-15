@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 
 class AppController extends Controller
 {
@@ -40,7 +42,6 @@ class AppController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $manager = $this->get('app_manager');
 
                 $short = $form->getData();
@@ -48,14 +49,20 @@ class AppController extends Controller
                 $short->setCounter(0);
                 $manager->save($short);
 
-                $this->addFlash('success', 'Short url created: <a alt="short url created" href="' . $request->getSchemeAndHttpHost().$short->getCode() . '">' . $request->getSchemeAndHttpHost().$short->getCode() . '</a>.');
+
+                $littleUrl = $request->getSchemeAndHttpHost() . '/' . $short->getCode();
+                $this->addFlash('success', 'Short url created: <a alt="short url created" href="' . $littleUrl . '">' . $littleUrl . '</a>.');
+
+               return new RedirectResponse('/'); //avoid form resubmission
             }
 
-            return $this->render('app/create.html.twig', array(
-                'form' => $form->createView()
-            ));
-        } catch(\Exception $e) {
-            throw $e;
+
+        } catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+            $this->addFlash('danger', 'An error occured. Please try again.');
         }
+
+        return $this->render('app/create.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

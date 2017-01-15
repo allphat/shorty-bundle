@@ -18,12 +18,13 @@
 
         <div class="row">
 
-            <form name="shorturl" class="form-horizontal" role="form " method="post" novalidate="novalidate" style="font-size:24px">
-                {{ form_errors(form.url)}}
-                {{ form_errors(form._token)}}
-
-
-                <div class="form-group">
+            <form name="shorturl" class="form-horizontal" role="form " method="post" style="font-size:24px">
+                {% if form.url.vars.errors is not empty %}
+                    <div class="alert alert-danger">{{ form.url.vars.errors.0.message}}</div>
+                {% elseif form._token.vars.errors is not empty %}
+                    <div class="alert alert-danger">{{ form._token.vars.errors.0.message}}</div>
+                {% endif %}
+                            <div class="form-group">
                     <div class="col-xs-6 col-md-4">
                         <label for="shorturl_url" class="">
                             <span>Enter your url</span>

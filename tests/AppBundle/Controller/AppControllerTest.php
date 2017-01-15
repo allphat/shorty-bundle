@@ -21,12 +21,13 @@ class AppControllerTest extends WebTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
 
         $this->assertContains('Short url created:', $crawler->filter('div')->text());
 
-
-       $info = $crawler->filter('a');
-       $link = $info->html();
+        $info = $crawler->filter('a');
+        $link = $info->html();
     }
 }
