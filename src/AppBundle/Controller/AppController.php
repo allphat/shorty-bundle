@@ -18,13 +18,14 @@ class AppController extends Controller
      */
     public function redirectAction($code)
     {
-        $short = $this->get('app_manager')->findByCode($id);
+        $short = $this->get('app_manager')->findByCode($code);
+        $this->get('app_manager')->updateCounter($short);
 
         if (!$short) {
             throw $this->createNotFoundException('Oopps this link does does not exist');
         }
 
-        return $this->redirect($short->getUrl(), 301);        
+        return $this->redirect($short->getUrl(), 301);
     }
 
     /**
@@ -43,6 +44,7 @@ class AppController extends Controller
     
             $short = $form->getData();
             $short->setCreatedAt((new \DateTime())->getTimestamp());
+            $short->setCounter(0);
             $manager->save($short);            
 
              $this->addFlash('success', 'Shorten url created: ' . $short->getCode());

@@ -11,7 +11,7 @@ class ShorturlManager
 	private $repository;
 
 	/**
-	 * store dico as array for eas of use
+	 * @param ShorturlRepository $repository
 	 */
 	public function __construct(ShorturlRepository $repository)
 	{
@@ -30,7 +30,6 @@ class ShorturlManager
 
 	/**
 	 * @param  ShorturlEntity  $short
-	 * @return [type]        [description]
 	 */
 	public function save(ShorturlEntity $short)
 	{
@@ -42,11 +41,19 @@ class ShorturlManager
 	/**
 	 * creates a 6 characters string
 	 * 
-	 * @return [type]         [description]
+	 * @return string
 	 */
 	public function encode()
 	{
 		return Shortener::generateLittleCode();
 	}
 
+	/**
+	 * @param  ShorturlEntity $short
+	 */
+	public function updateCounter(ShorturlEntity $short)
+	{
+		$short->setCounter(($short->getCounter()+1));
+		$this->repository->save($short);
+	}
 }
