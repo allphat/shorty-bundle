@@ -34,25 +34,28 @@ class AppController extends Controller
      */
     public function createAction(Request $request)
     {
-        $form = $this->createForm(ShorturlType::class, new ShorturlEntity());
+        try {
+            $form = $this->createForm(ShorturlType::class, new ShorturlEntity());
 
-        $form->handleRequest($request);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-    
-            $manager = $this->get('app_manager');
-    
-            $short = $form->getData();
-            $short->setCreatedAt((new \DateTime())->getTimestamp());
-            $short->setCounter(0);
-            $manager->save($short);            
+            if ($form->isSubmitted() && $form->isValid()) {
 
-             $this->addFlash('success', 'Shorten url created: ' . $short->getCode());
+                $manager = $this->get('app_manager');
+
+                $short = $form->getData();
+                $short->setCreatedAt((new \DateTime())->getTimestamp());
+                $short->setCounter(0);
+                $manager->save($short);
+
+                $this->addFlash('success', 'Short url created: <a alt="short url created" href="' . $request->getSchemeAndHttpHost().$short->getCode() . '">' . $request->getSchemeAndHttpHost().$short->getCode() . '</a>.');
+            }
+
+            return $this->render('app/create.html.twig', array(
+                'form' => $form->createView()
+            ));
+        } catch(\Exception $e) {
+            throw $e;
         }
-
-        return $this->render('app/create.html.twig', array(
-            'form' => $form->createView(),
-            'page_title' => 'short urls creation'
-        ));
     }
 }

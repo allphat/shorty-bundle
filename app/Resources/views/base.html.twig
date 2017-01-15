@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}{{page_title}}{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body style="margin:auto;text-align:center">
-        {%block flashmessage %}
-            {% for type, messages in app.session.flashbag.all() %}
-               {% for message in messages %}
-                 <div style="border:1px solid #fff">{{message}}</div>
-               {% endfor %}
-             {% endfor %}
-        {%endblock %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <title>{% block title %}Litte Url Shortener{% endblock %}</title>
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite'
+        '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body style="padding-top:40px">
+<div class="container-fluid">
+    <div class="col-xs-6 col-sm-4"></div>
+
+    <div class="col-xs-6 col-sm-4">
+
+        {{ include('flashmessages.html.twig') }}
+
         {% block body %}{% endblock %}
-    </body>
+
+    </div>
+
+    <div class="col-xs-6 col-sm-4"></div>
+
+</div>
+{% block javascripts %}
+    {% javascripts
+    '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+    '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+</body>
 </html>
