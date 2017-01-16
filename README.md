@@ -1,17 +1,21 @@
-almtest
+Shorty  [![Build Status](https://travis-ci.org/alphatesla/shorty.svg?branch=master)](https://travis-ci.org/alphatesla/shorty)
 =======
 
 A Symfony project created on January 10, 2017, 8:56 pm.
 
 Shorty justs take an url and renters a minified version "à la bitly".
 
+Shortener algo can generate 56800235584 unique combinations.
+So it is quite comfortable if it is planned to be used internally.
+For a commercial service, every code generation must be guaranteed to be unique.
+
 Prerequisites
 ==============
 
+Composer is installed on your environment
 Symfony is installed on your environment.
-Project developed in PHP 7.
 Sqlite3 needs to be installed.
-phpunit for testing.
+Phpunit is used for testing.
 
 
 Install
@@ -49,7 +53,4 @@ Nice to have
 
 - I would move app templates in bundle, apply proper theming to get rid of custom error management if form template
 
-=============== 
-
-[![Build Status](https://travis-ci.org/alphatesla/shorty.svg?branch=master)](https://travis-ci.org/alphatesla/shorty)
-
+===============

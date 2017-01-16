@@ -14,11 +14,10 @@ class Shortener
     public static function generateLittleCode()
     {
         $return = '';
-        $arrayDico = str_split(self::DICO);
-        $dicoSize = count($arrayDico) - 1;
         $i = self::MAX_SIZE;
+        $dico = self::DICO;
         while ($i > 0) {
-            $return .= $arrayDico[random_int(0, $dicoSize)];
+            $return .= $dico{random_int(0, 61)};
             $i--;
         }
 
