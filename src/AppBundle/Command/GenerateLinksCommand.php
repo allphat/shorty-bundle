@@ -36,6 +36,8 @@ class GenerateLinksCommand extends ContainerAwareCommand
                 $number--;
             }
         }
+
+        $output->writeln('links generated');
     }
 
     /**
