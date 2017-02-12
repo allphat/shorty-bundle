@@ -11,6 +11,7 @@ class GenerateLinksCommandTest extends KernelTestCase
 {
     public function testExecute()
     {
+        $this->markTestSkipped('to be launched in integration suite');
         self::bootKernel();
         $application = new Application(self::$kernel);
 
