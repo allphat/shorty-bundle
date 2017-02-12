@@ -2,12 +2,12 @@
 
 namespace Tests\AppBundle\Repository;
 
-use AppBundle\Entity\ShorturlEntity;
-use AppBundle\Repository\ShorturlRepository;
+use AppBundle\Entity\ShortyEntity;
+use AppBundle\Repository\ShortyRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
 
-class ShorturlRepositoryTest extends \PHPUnit_Framework_TestCase
+class ShortyRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     private $em;
     private $meta;
@@ -22,13 +22,13 @@ class ShorturlRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->meta = $this->getMockBuilder(ClassMetadata::class)
                      ->disableOriginalConstructor()
                      ->getMock();
-             
-        $this->repository = new ShorturlRepository($this->em, $this->meta);
+
+        $this->repository = new ShortyRepository($this->em, $this->meta);
     }
 
     public function testSave()
     {
-        $short = new ShorturlEntity();
+        $short = new ShortyEntity();
 
         $this->em->expects($this->once())
             ->method('persist')

@@ -7,12 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * Shorturl
+ * Shorty
  *
- * @ORM\Table(name="shorturl")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ShorturlRepository")
+ * @ORM\Table(name="shorty",uniqueConstraints={@ORM\UniqueConstraint(name="code_idx", columns={"code"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ShortyRepository")
  */
-class ShorturlEntity
+class ShortyEntity
 {
     /**
      *
@@ -122,15 +122,6 @@ class ShorturlEntity
         return $this->counter;
     }
 
-    /**
-     * @param integer $counter
-     */
-    public function setCounter($counter)
-    {
-        $this->counter = $counter;
-
-        return $this;
-    }
 
      /**
      * Get createdAt

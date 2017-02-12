@@ -6,8 +6,8 @@ use AppBundle\Shortener\Shortener;
 
 class ShortenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGenerateLittleCode()
+    public function testGenerateRamdomUri()
     {
-        $this->assertRegexp('/\w{6}/', Shortener::generateLittleCode());
+        $this->assertRegexp('/\w{6}/', Shortener::generateRandomUri());
     }
 }

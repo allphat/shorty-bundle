@@ -12,7 +12,7 @@
 
         <div class="row">
 
-            <form name="shorturl" class="form-horizontal" role="form " method="post" style="font-size:24px">
+            <form name="shorty" class="form-horizontal" role="form " method="post" style="font-size:24px">
                 {% if form.vars.errors is not empty %}
                     <div class="alert alert-danger">{{ form.vars.errors.0.message}}</div>
                 {% elseif form.url.vars.errors is not empty %}
@@ -22,18 +22,18 @@
                 {% endif %}
                 <div class="form-group">
                     <div class="col-xs-6 col-md-4">
-                        <label for="shorturl_url" class="">
+                        <label for="shorty_url" class="">
                             <span>Enter your url</span>
                             <span class="required" title="This field is required">*</span>
                         </label>
                     </div>
                     <div class="col-xs-12 col-md-8">
-                        <input type="text" id="shorturl_url" name="shorturl[url]" class="form-control input-normal" required="required" placeholder="https://www.alittlemarket.com/" value="{% if form.url.vars.value is not empty %}{{form.url.vars.value}}{% endif %}" />
+                        <input type="text" id="shorty_url" name="shorty[url]" class="form-control input-normal" required="required" placeholder="https://www.alittlemarket.com/" value="{% if form.url.vars.value is not empty %}{{form.url.vars.value}}{% endif %}" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button type="submit" class="btn btn-lg btn-success" id="shorturl_save" name="shorturl[save]">Generate little link</button>
+                        <button type="submit" class="btn btn-lg btn-success" id="shorty_save" name="shorty[save]">Generate little link</button>
                     </div>
                 </div>
                 {{ form_widget(form._token) }}
