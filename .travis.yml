@@ -34,7 +34,6 @@ notifications:
   email:
     -  ybrigant@gmail.com
 
-
 after_success:
   - travis_retry php vendor/bin/coveralls
   # or enable logging
