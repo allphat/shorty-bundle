@@ -26,9 +26,9 @@ script:
   - mkdir -p build/logs
   - phpunit -c phpunit.xml.dist
 
-matrix:
-  allow_failures:
-  - rvm: 1.9.3
+branches:
+  only:
+    - master
 
 notifications:
   email:
