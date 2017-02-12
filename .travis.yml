@@ -1,17 +1,41 @@
+git:
+  depth: 25
+
 language: php
-php:
-  - '5.5'
-  - '5.6'
-  - '7.0'
-  - '7.1'
-  - hhvm
+
+matrix:
+    include:
+        # Use the newer stack for HHVM as HHVM does not support Precise anymore since a long time and so Precise has an outdated version
+        - php: hhvm-3.15
+          sudo: required
+          dist: trusty
+          group: edge
+        - php: 5.5
+        - php: 5.6
+        - php: 7.0
+          env: deps=high
+        - php: 7.1
+          env: deps=low
+    fast_finish: true
+
 before_script:
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - composer install
 
 script:
-  - phpunit -c travis.xml.dist
+  - mkdir -p build/logs
+  - phpunit -c phpunit.xml.dist
+
+matrix:
+  allow_failures:
+  - rvm: 1.9.3
 
 notifications:
   email:
     -  ybrigant@gmail.com
+
+
+after_success:
+  - travis_retry php vendor/bin/coveralls
+  # or enable logging
+  - travis_retry php vendor/bin/coveralls -v
