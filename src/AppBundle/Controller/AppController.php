@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\ShorturlEntity;
-use AppBundle\Manager\ShorturlManager;
-use AppBundle\Form\ShorturlType;
+use AppBundle\Entity\ShortyEntity;
+use AppBundle\Manager\ShortyManager;
+use AppBundle\Form\ShortyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,8 +20,8 @@ class AppController extends Controller
      */
     public function redirectAction($code)
     {
-        $short = $this->get('app_manager')->findByCode($code);
-        $this->get('app_manager')->updateCounter($short);
+        $short = $this->get('shorty_manager')->findByCode($code);
+        $this->get('shorty_manager')->updateCounter($short);
 
         if (!$short) {
             throw $this->createNotFoundException('Oopps this link does does not exist');
@@ -37,16 +37,15 @@ class AppController extends Controller
     public function createAction(Request $request)
     {
         try {
-            $form = $this->createForm(ShorturlType::class, new ShorturlEntity());
+            $form = $this->createForm(ShortyType::class, new ShortyEntity());
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $manager = $this->get('app_manager');
+                $manager = $this->get('shorty_manager');
 
                 $short = $form->getData();
                 $short->setCreatedAt((new \DateTime())->getTimestamp());
-                $short->setCounter(0);
                 $manager->save($short);
 
 

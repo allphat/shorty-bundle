@@ -5,12 +5,16 @@ parameters:
 
 services:
     #arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    app_repository:
-        class: AppBundle\Repository\ShorturlRepository
+    shorty_repository:
+        class: AppBundle\Repository\ShortyRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
-        arguments: [ AppBundle\Entity\ShorturlEntity ]
-    
-    app_manager:
-        class: AppBundle\Manager\ShorturlManager
-        arguments: ["@app_repository"]
-        
+        arguments: [ AppBundle\Entity\ShortyEntity ]
+
+    shorty_generated_repository:
+        class: AppBundle\Repository\ShortyGeneratedRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: [ AppBundle\Entity\ShortyGeneratedEntity ]
+
+    shorty_manager:
+        class: AppBundle\Manager\ShortyManager
+        arguments: ["@shorty_repository", "@shorty_generated_repository"]

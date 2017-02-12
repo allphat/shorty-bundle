@@ -2,11 +2,11 @@
 
 namespace Tests\AppBundle\Form;
 
-use AppBundle\Entity\ShorturlEntity;
-use AppBundle\Form\ShorturlType;
+use AppBundle\Entity\ShortyEntity;
+use AppBundle\Form\ShortyType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class TestedTypeTest extends TypeTestCase
+class ShortTypeTest extends TypeTestCase
 {
     public function testSubmitValidData()
     {
@@ -15,9 +15,9 @@ class TestedTypeTest extends TypeTestCase
             'url' => 'http://test.com/'
         );
 
-        $form = $this->factory->create(ShorturlType::class);
+        $form = $this->factory->create(ShortyType::class);
 
-        $object = new ShorturlEntity();
+        $object = new ShortyEntity();
         $object->setUrl($formData['url']);
 
         // submit the data to the form directly
@@ -47,12 +47,11 @@ class TestedTypeTest extends TypeTestCase
                 'url' => $url
             );
 
-            $form = $this->factory->create(ShorturlType::class);
+            $form = $this->factory->create(ShortyType::class);
 
-            $object = new ShorturlEntity();
+            $object = new ShortyEntity();
             $object->setUrl($formData['url']);
 
-            // submit the data to the form directly
             $form->submit($formData);
             $errors = $form->getErrors();
             $this->assertCount(1, $errors);

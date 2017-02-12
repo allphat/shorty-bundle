@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\ShorturlEntity;
+use AppBundle\Entity\ShortyEntity;
 use GuzzleHttp\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class ShorturlType extends AbstractType
+class ShortyType extends AbstractType
 {
 	/**
 	 * @param  FormBuilderInterface $builder
@@ -76,7 +76,7 @@ class ShorturlType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 	    $resolver->setDefaults(
-	    	['data_class' => ShorturlEntity::class]
+	    	['data_class' => ShortyEntity::class]
 	    );
 	}
 	/**
@@ -84,6 +84,6 @@ class ShorturlType extends AbstractType
 	 */
 	public function getName()
 	{
-	    return 'create_short_url';
+	    return 'create_shorty';
 	}
 }

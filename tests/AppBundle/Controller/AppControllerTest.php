@@ -17,7 +17,7 @@ class AppControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('Generate little link')->form();
 
-        $form->setValues(['shorturl' => ['url' => 'http://test.com']]);
+        $form->setValues(['shorty' => ['url' => 'http://test.com']]);
 
         $crawler = $client->submit($form);
 
