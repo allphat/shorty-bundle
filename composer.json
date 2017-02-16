@@ -3,7 +3,7 @@
     "license": "proprietary",
     "type": "symfony-bundle",
     "autoload": {
-        "psr-4": { "Alphat\\Bundle\\ShortyBundle\\": "" }
+        "psr-4": { "Alphat\\Bundle\\ShortyBundle\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
