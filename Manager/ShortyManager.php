@@ -4,22 +4,20 @@ namespace Alphat\Bundle\ShortyBundle\Manager;
 
 use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
 use Alphat\Bundle\ShortyBundle\Repository\ShortyRepository;
-use Alphat\Bundle\ShortyBundle\Repository\ShortyGeneratedRepository;
 use Alphat\Bundle\ShortyBundle\Shortener\Shortener;
 
 class ShortyManager
 {
 	private $repository;
 
-	private $shortyGeneratedRepository;
+	private $shortyRepository;
 
 	/**
 	 * @param ShortyRepository $repository
 	 */
-	public function __construct(ShortyRepository $repository, ShortyGeneratedRepository $shortyGeneratedRepository)
+	public function __construct(ShortyRepository $shortyRepository)
 	{
-		$this->repository = $repository;
-		$this->shortyGeneratedRepository = $shortyGeneratedRepository;
+		$this->shortyRepository = $shortyRepository;
 	}
 
 
@@ -29,7 +27,7 @@ class ShortyManager
 	 */
 	public function findByCode($code)
 	{
-		return $this->repository->findByCode($code)[0];
+		return $this->shortyRepository->findByCode($code)[0];
 	}
 
 	/**
@@ -37,15 +35,18 @@ class ShortyManager
 	 */
 	public function save(ShortyEntity $short)
 	{
-		$generated = $this->shortyGeneratedRepository->findUnusedOne();
+		$shorted = $this->shortyRepository->findUnusedOne();
+		if (is_null($shorted)) {
+			$short->setCode($this->encode());
+		} else {
+			$short = $shorted;
+		}
 
-		$short->setCode($generated->getCode());
+		$short->setIsUsed(true);
 
-		$generated->setIsUsed(true);
+		$this->shortyRepository->save($short);
 
-		$this->shortyGeneratedRepository->save($generated);
-
-		$this->repository->save($short);
+		return $short;
 	}
 
 
@@ -57,15 +58,6 @@ class ShortyManager
 	public function encode()
 	{
 		return Shortener::generateRandomUri();
-	}
-
-	/**
-	 * @param  ShortyEntity $short
-	 */
-	public function updateCounter(ShortyEntity $short)
-	{
-		$short->setCounter(($short->getCounter()+1));
-		$this->repository->save($short);
 	}
 }
 

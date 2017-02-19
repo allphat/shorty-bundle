@@ -3,6 +3,7 @@
 namespace Alphat\Bundle\ShortyBundle\Repository;
 
 use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
@@ -20,10 +21,40 @@ class ShortyRepository extends EntityRepository
      * @param  ShortyEntity $short [description]
      * @return [type]                [description]
      */
-    public function save(ShortyEntity $short)
+    public function save(ShortyEntity $shortyEntity)
     {
-        $this->_em->persist($short);
-        $this->_em->flush();
+        try {
+            $this->_em->persist($shortyEntity);
+            $this->_em->flush();
+
+            return true;
+        } catch (UniqueConstraintViolationException $e) {
+            return false;
+        }
+    }
+
+
+    /**
+     * [findLast description]
+     * @return [type] [description]
+     */
+    public function findLast()
+    {
+        $query = $this->createQueryBuilder('sg');
+        $query->select('sg');
+        $query->setMaxResults(1);
+        $query->orderBy('sg.id', 'DESC');
+
+        return $query->getQuery()->getResult()[0];
+    }
+
+    /**
+     * [getUnusedOne description]
+     * @return [type] [description]
+     */
+    public function findUnusedOne()
+    {
+        return $this->findOneBy(['is_used' => false]);
     }
 }
 

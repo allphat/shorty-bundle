@@ -3,10 +3,8 @@
 namespace Tests\Alphat\Bundle\ShortyBundle\Manager;
 
 use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
-use Alphat\Bundle\ShortyBundle\Entity\ShortyGeneratedEntity;
 use Alphat\Bundle\ShortyBundle\Manager\ShortyManager;
 use Alphat\Bundle\ShortyBundle\Repository\ShortyRepository;
-use Alphat\Bundle\ShortyBundle\Repository\ShortyGeneratedRepository;
 
 
 class ShortyManagerTest extends \PHPUnit_Framework_TestCase
@@ -18,15 +16,10 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->repository = $this->getMockBuilder(ShortyRepository::class)
                      ->disableOriginalConstructor()
-                     ->setMethods(['findByCode', 'save'])
+                     ->setMethods(['findByCode', 'save', 'findUnusedOne'])
                      ->getMock();
 
-        $this->generatedRepository = $this->getMockBuilder(ShortyGeneratedRepository::class)
-                     ->disableOriginalConstructor()
-                     ->setMethods(['findUnusedOne', 'save'])
-                     ->getMock();
-
-        $this->manager = new ShortyManager($this->repository, $this->generatedRepository);
+        $this->manager = new ShortyManager($this->repository);
     }
 
     public function testFindByCode()
@@ -38,26 +31,48 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->findByCode('test');
     }
 
-    public function testSave()
+    public function testEncode()
     {
-        $short = new ShortyEntity();
-        $shortyGenerated = new ShortyGeneratedEntity();
-        $shortyGenerated->setCode('vrl38H');
+        $this->assertRegExp('/\w{6}/', $this->manager->encode());
+    }
 
-        $this->generatedRepository->expects($this->once())
+    public function testSaveKnown()
+    {
+        $shortyEntity = new ShortyEntity();
+        $shortyEntity->setCode('vrl38H');
+        $shortyEntity->setIsUsed(true);
+
+        $this->repository->expects($this->once())
             ->method('findUnusedOne')
-            ->willReturn($shortyGenerated);
+            ->willReturn($shortyEntity);
 
         $this->repository->expects($this->once())
             ->method('save')
-            ->with($short);
+            ->with($shortyEntity);
 
-        $this->generatedRepository->expects($this->once())
+        $result = $this->manager->save($shortyEntity);
+
+        $this->assertTrue($result->getIsUsed());
+
+        $this->assertEquals('vrl38H', $result->getCode());
+    }
+
+    public function testSaveNew()
+    {
+        $shortyEntity = new ShortyEntity();
+
+        $this->repository->expects($this->once())
+            ->method('findUnusedOne')
+            ->willReturn(null);
+
+        $this->repository->expects($this->once())
             ->method('save')
-            ->with($shortyGenerated);
+            ->with($shortyEntity);
 
-        $this->manager->save($short);
+        $result = $this->manager->save($shortyEntity);
 
-        $this->assertRegExp('/[\w]{6}/', $short->getCode());
+        $this->assertTrue($result->getIsUsed());
+
+        $this->assertRegExp('/[\w]{6}/', $result->getCode());
     }
 }
