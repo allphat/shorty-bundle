@@ -1,0 +1,17 @@
+services:
+#    alphat_shorty.example:
+#        class: Alphat\Bundle\ShortyBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    alphat_shorty.repository:
+        class: Alphat\Bundle\ShortyBundle\Repository\ShortyRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: [ Alphat\Bundle\ShortyBundle\Entity\ShortyEntity ]
+
+    alphat_shorty.generated.repository:
+        class: Alphat\Bundle\ShortyBundle\Repository\ShortyGeneratedRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: [ Alphat\Bundle\ShortyBundle\Entity\ShortyGeneratedEntity ]
+
+    alphate_shorty.manager:
+        class: AppBundle\Manager\ShortyManager
+        arguments: ["@alphat_shorty.repository", "@alphat_shorty.generated.repository"]
