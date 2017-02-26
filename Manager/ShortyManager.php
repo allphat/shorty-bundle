@@ -8,8 +8,6 @@ use Alphat\Bundle\ShortyBundle\Shortener\Shortener;
 
 class ShortyManager
 {
-	private $repository;
-
 	private $shortyRepository;
 
 	/**
@@ -31,12 +29,15 @@ class ShortyManager
 	}
 
 	/**
-	 * @param  ShortyEntity  $short
+	 * [save description]
+	 * @return [type] [description]
 	 */
-	public function save(ShortyEntity $short)
+	public function save()
 	{
 		$shorted = $this->shortyRepository->findUnusedOne();
 		if (is_null($shorted)) {
+			$short = new ShortyEntity();
+            $short->setCreatedAt((new \DateTime())->getTimestamp());
 			$short->setCode($this->encode());
 		} else {
 			$short = $shorted;

@@ -50,29 +50,25 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
             ->method('save')
             ->with($shortyEntity);
 
-        $result = $this->manager->save($shortyEntity);
+        $result = $this->manager->save();
 
         $this->assertTrue($result->getIsUsed());
-
         $this->assertEquals('vrl38H', $result->getCode());
     }
 
     public function testSaveNew()
     {
-        $shortyEntity = new ShortyEntity();
-
         $this->repository->expects($this->once())
             ->method('findUnusedOne')
             ->willReturn(null);
 
         $this->repository->expects($this->once())
-            ->method('save')
-            ->with($shortyEntity);
+            ->method('save');
 
-        $result = $this->manager->save($shortyEntity);
+        $result = $this->manager->save();
 
         $this->assertTrue($result->getIsUsed());
+        $this->assertRegExp('/\w{6}/', $result->getCode());
 
-        $this->assertRegExp('/[\w]{6}/', $result->getCode());
     }
 }

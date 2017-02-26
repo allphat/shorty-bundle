@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Shorty
  *
  * @ORM\Table(name="shorty",uniqueConstraints={@ORM\UniqueConstraint(name="code_generated_idx", columns={"code"})})
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ShortyRepository")
+ * @ORM\Entity(repositoryClass="Alphat\Bundle\ShortyBundle\Repository\ShortyRepository")
  */
 class ShortyEntity
 {

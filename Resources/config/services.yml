@@ -1,7 +1,4 @@
 services:
-#    alphat_shorty.example:
-#        class: Alphat\Bundle\ShortyBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
     shorty.repository:
         class: Alphat\Bundle\ShortyBundle\Repository\ShortyRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
@@ -9,8 +6,8 @@ services:
 
     shorty.manager:
         class: Alphat\Bundle\ShortyBundle\Manager\ShortyManager
-        arguments: ["@alphat_shorty.repository"]
+        arguments: ["@shorty.repository"]
 
-    shorty.create_controller:
+    shorty.controller:
         class: Alphat\Bundle\ShortyBundle\Controller\ShortyController
-
+        arguments: ["@shorty.manager"]

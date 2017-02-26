@@ -2,18 +2,29 @@
 
 namespace Alphat\Bundle\ShortyBundle\Controller;
 
-use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Alphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ShortyController extends Controller
 {
-    /**
-     * @Route("/{code}", name="redir", requirements={"code"= "^[\w]{6}$"})
-     * @Method({"GET","HEAD"})
-     */
-    public function redirectAction($code)
+    private $shortyManager;
+
+    public function __construct(ShortyManager $shortyManager)
     {
-        $short = $this->get('shorty_manager')->findByCode($code);
+        $this->shortyManager = $shortyManager;
+    }
+
+
+    /**
+     * Route("/{code}", name="redirect", requirements={"code"= "^[\w]{6}$"})
+     * Method({"GET","HEAD"})
+     */
+    /*public function redirectAction($code)
+    {
+        $short = $this->get('shorty.manager')->findByCode($code);
         $this->get('shorty_manager')->updateCounter($short);
 
         if (!$short) {
@@ -23,34 +34,25 @@ class ShortyController extends Controller
         //@TODO create method to ckeck against options
 
         return $this->redirect($short->getUrl(), 301);
-    }
+    }*/
 
     /**
-     * @Route("/", name="create")
+     * @Route("/", name="create", service="shorty.controller")
      * @Method({"POST"})
      */
-    public function createAction(array $params)
+    public function createAction()
     {
         try {
-            if (!empty($params))
-            {
-                $short = new ShortyEntity();
-                $short->setCreatedAt((new \DateTime())->getTimestamp());
-                $manager = $this->get('shorty_manager');
-                $manager->save($short);
 
-                $response = [
-                    $short->getCode()
-                ];
+            $short = $this->shortyManager->save();
 
-                $response = $this->addOptionsToResponse($params, $response;
+            $response = [
+                $short->getCode()
+            ];
 
 
-                return new JsonResponse($response);
-            } else {
-                throw new \BadRequestException("Error Processing Request");
+            return new JsonResponse(['code' => $response]);
 
-            }
         } catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
             return new JsonResponse($e->getMessage());
         }
@@ -58,27 +60,23 @@ class ShortyController extends Controller
 
 
     /**
-     * @param arry $params   [description]
-     * @param array $response [description]
-     * @return array $response
+     * @param array $params   [description]
      */
-    protected function addOptionsToResponse($params, $response)
+    protected function checkOptions($params)
     {
-        $response['allow_lifetime'] = $this->getParameter('shorty.allow_lifetime');
-        if (isset($params['allow_lifetime']) {
-            $response = $params['allow_lifetime'];
+        /*$response['allow_lifetime'] = $this->getParameter('shorty.allow_lifetime');
+        if (isset($params['allow_lifetime'])) {
+            throw new \Exception('');
         }
 
         $response['allow_secure'] = $this->getParameter('shorty.allow_secure');
-        if (isset($params['allow_secure']) {
-            $response = $params['allow_secure'];
+        if (isset($params['allow_secure']) && is_null($params['allow_secure'])) {
+            throw new \Exception('secured url not allowed');
         }
 
         $response['allow_follow'] = $this->getParameter('shorty.allow_follow');
-        if (isset($params['allow_follow']) {
-            $response = $params['allow_follow'];
-        }
-
-        return $response;
+        if (isset($params['allow_follow'])  && is_null($params['allow_follow'])) {
+            throw new \Exception('Redirection not allowed');
+        }*/
     }
 }
