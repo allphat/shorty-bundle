@@ -1,3 +1,4 @@
-alphat_shorty:
+shorty:
     resource: "@AlphatShortyBundle/Controller"
     type:     annotation
+    prefix: /shorty
