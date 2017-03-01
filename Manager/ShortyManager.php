@@ -28,6 +28,42 @@ class ShortyManager
 		return $this->shortyRepository->findByCode($code)[0];
 	}
 
+	public function createEntity()
+	{
+		$short = new ShortyEntity();
+        $short->setCreatedAt((new \DateTime())->getTimestamp());
+		$short->setCode($this->encode());
+		$short->setIsUsed(false);
+
+		$this->shortyRepository->persist($short);
+
+		return $short;
+	}
+
+	/**
+	 * [createEntity description]
+	 * @return [type] [description]
+	 */
+	public function createAndUseEntity()
+	{
+		$short = new ShortyEntity();
+        $short->setCreatedAt((new \DateTime())->getTimestamp());
+		$short->setCode($this->encode());
+		$short->setIsUsed(true);
+
+		return $short;
+	}
+
+
+	/**
+	 * [saveEntity description]
+	 */
+	public function saveEntity()
+	{
+		$this->shortyRepository->save();
+	}
+
+
 	/**
 	 * [save description]
 	 * @return [type] [description]
@@ -36,16 +72,15 @@ class ShortyManager
 	{
 		$shorted = $this->shortyRepository->findUnusedOne();
 		if (is_null($shorted)) {
-			$short = new ShortyEntity();
-            $short->setCreatedAt((new \DateTime())->getTimestamp());
-			$short->setCode($this->encode());
+			$short = $this->createAndUseEntity();
+
 		} else {
 			$short = $shorted;
+			$short->setIsUsed(true);
 		}
 
-		$short->setIsUsed(true);
-
-		$this->shortyRepository->save($short);
+		$this->shortyRepository->persist($short);
+		$this->shortyRepository->save();
 
 		return $short;
 	}
@@ -58,7 +93,7 @@ class ShortyManager
 	 */
 	public function encode()
 	{
-		return Shortener::generateRandomUri();
+		return Shortener::generateRandomCode();
 	}
 }
 
