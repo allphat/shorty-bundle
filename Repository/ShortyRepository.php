@@ -16,15 +16,25 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 class ShortyRepository extends EntityRepository
 {
     /**
+     * [persist description]
+     * @param  ShortyEntity $shortyEntity [description]
+     * @return [type]                     [description]
+     */
+    public function persist(ShortyEntity $shortyEntity)
+    {
+        $this->_em->persist($shortyEntity);
+    }
+
+
+    /**
      * persists links in db
      *
      * @param  ShortyEntity $short [description]
      * @return [type]                [description]
      */
-    public function save(ShortyEntity $shortyEntity)
+    public function save()
     {
         try {
-            $this->_em->persist($shortyEntity);
             $this->_em->flush();
 
             return true;

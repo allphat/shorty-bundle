@@ -16,7 +16,7 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->repository = $this->getMockBuilder(ShortyRepository::class)
                      ->disableOriginalConstructor()
-                     ->setMethods(['findByCode', 'save', 'findUnusedOne'])
+                     ->setMethods(['findByCode', 'save', 'findUnusedOne', 'persist'])
                      ->getMock();
 
         $this->manager = new ShortyManager($this->repository);
@@ -36,19 +36,36 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/\w{6}/', $this->manager->encode());
     }
 
+    public function testCreateEntity()
+    {
+        $result = $this->manager->createEntity();
+
+        $this->assertFalse($result->getIsUsed());
+    }
+
+    public function testCreateAndUseEntity()
+    {
+        $result = $this->manager->createAndUseEntity();
+
+        $this->assertTrue($result->getIsUsed());
+    }
+
     public function testSaveKnown()
     {
         $shortyEntity = new ShortyEntity();
         $shortyEntity->setCode('vrl38H');
-        $shortyEntity->setIsUsed(true);
+        $shortyEntity->setIsUsed(false);
 
         $this->repository->expects($this->once())
             ->method('findUnusedOne')
             ->willReturn($shortyEntity);
 
         $this->repository->expects($this->once())
-            ->method('save')
+            ->method('persist')
             ->with($shortyEntity);
+
+        $this->repository->expects($this->once())
+            ->method('save');
 
         $result = $this->manager->save();
 
@@ -61,6 +78,9 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
         $this->repository->expects($this->once())
             ->method('findUnusedOne')
             ->willReturn(null);
+
+        $this->repository->expects($this->once())
+            ->method('persist');
 
         $this->repository->expects($this->once())
             ->method('save');

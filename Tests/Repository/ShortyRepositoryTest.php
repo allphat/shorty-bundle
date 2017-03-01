@@ -66,31 +66,14 @@ class ShortyRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSave()
     {
-        $short = new ShortyEntity();
 
         $this->em->expects($this->once())
-            ->method('persist')
-            ->with($short);
+            ->method('flush');
 
-
-        $this->em->expects($this->once())
-            ->method('flush')
-            ->with();
-
-        $result = $this->repository->save($short);
+        $result = $this->repository->save();
         $this->assertTrue($result);
     }
 
-    public function testSaveException()
-    {
-        $short = new ShortyEntity();
-
-        $this->em->method('persist')
-            ->with($short);
-
-        $result = $this->repository->save($short);
-        $this->assertTrue($result);
-    }
 
     public function testFindLast()
     {

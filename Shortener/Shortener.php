@@ -11,7 +11,7 @@ class Shortener
      * generate an alphanum code on MAX_SIZE characters
      * @return string $return
      */
-    public static function generateRandomUri()
+    public static function generateRandomCode()
     {
         $return = '';
         $i = self::MAX_SIZE;
