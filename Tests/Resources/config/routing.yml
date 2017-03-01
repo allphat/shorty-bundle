@@ -1,3 +1,0 @@
-alphat_shorty:
-    resource: "@AlphatShortyBundle/Controller"
-    type:     annotation

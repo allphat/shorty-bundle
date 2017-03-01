@@ -2,58 +2,81 @@
 
 namespace Alphat\Bundle\ShortyBundle\Controller;
 
+use Alphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ShortyController extends Controller
 {
-    /**
-     * @Route("/{code}", name="redir", requirements={"code"= "^[\w]{6}$"})
-     * @Method({"GET","HEAD"})
-     */
-    public function redirectAction($code)
+    private $shortyManager;
+
+    public function __construct(ShortyManager $shortyManager)
     {
-        $short = $this->get('shorty_manager')->findByCode($code);
+        $this->shortyManager = $shortyManager;
+    }
+
+
+    /**
+     * Route("/{code}", name="redirect", requirements={"code"= "^[\w]{6}$"})
+     * Method({"GET","HEAD"})
+     */
+    /*public function redirectAction($code)
+    {
+        $short = $this->get('shorty.manager')->findByCode($code);
         $this->get('shorty_manager')->updateCounter($short);
 
         if (!$short) {
             throw $this->createNotFoundException('Oopps this link does does not exist');
         }
 
+        //@TODO create method to ckeck against options
+
         return $this->redirect($short->getUrl(), 301);
-    }
+    }*/
 
     /**
-     * @Route("/", name="create")
-     * @Method({"GET","POST"})
+     * @Route("/", name="create", service="shorty.controller")
+     * @Method({"POST"})
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
         try {
-            $form = $this->createForm(ShortyType::class, new ShortyEntity());
 
-            $form->handleRequest($request);
+            $short = $this->shortyManager->save();
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $manager = $this->get('shorty_manager');
-
-                $short = $form->getData();
-                $short->setCreatedAt((new \DateTime())->getTimestamp());
-                $manager->save($short);
+            $response = [
+                $short->getCode()
+            ];
 
 
-                $littleUrl = $request->getSchemeAndHttpHost() . '/' . $short->getCode();
-                $this->addFlash('success', 'Short url created: <a alt="short url created" href="' . $littleUrl . '">' . $littleUrl . '</a>.');
-
-               return new RedirectResponse('/'); //avoid form resubmission
-            }
-
+            return new JsonResponse(['code' => $response]);
 
         } catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
-            $this->addFlash('danger', 'An error occured. Please try again.');
+            return new JsonResponse($e->getMessage());
+        }
+    }
+
+
+    /**
+     * @param array $params   [description]
+     */
+    protected function checkOptions($params)
+    {
+        /*$response['allow_lifetime'] = $this->getParameter('shorty.allow_lifetime');
+        if (isset($params['allow_lifetime'])) {
+            throw new \Exception('');
         }
 
-        return $this->render('app/create.html.twig', array(
-            'form' => $form->createView()
-        ));
+        $response['allow_secure'] = $this->getParameter('shorty.allow_secure');
+        if (isset($params['allow_secure']) && is_null($params['allow_secure'])) {
+            throw new \Exception('secured url not allowed');
+        }
+
+        $response['allow_follow'] = $this->getParameter('shorty.allow_follow');
+        if (isset($params['allow_follow'])  && is_null($params['allow_follow'])) {
+            throw new \Exception('Redirection not allowed');
+        }*/
     }
 }

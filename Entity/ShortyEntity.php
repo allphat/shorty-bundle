@@ -1,6 +1,6 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\Entity;
+namespace  Alphat\Bundle\ShortyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Shorty
  *
- * @ORM\Table(name="shorty",uniqueConstraints={@ORM\UniqueConstraint(name="code_idx", columns={"code"})})
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ShortyRepository")
+ * @ORM\Table(name="shorty",uniqueConstraints={@ORM\UniqueConstraint(name="code_generated_idx", columns={"code"})})
+ * @ORM\Entity(repositoryClass="Alphat\Bundle\ShortyBundle\Repository\ShortyRepository")
  */
 class ShortyEntity
 {
@@ -24,23 +24,17 @@ class ShortyEntity
 
     /**
      *
-     * @ORM\Column(name="url", type="string", length=500, nullable=false)
+     * @ORM\Column(name="code", type="string", nullable = false, options={"aaaaaa"})
      * @Assert\NotBlank()
      * @Assert\Url()
      */
-    private $url;
-
-
-    /**
-     *
-     * @ORM\Column(name="code", type="string", length=6, nullable=false, unique=true)
-     */
     private $code;
 
+
     /**
-     * @ORM\Column(name="counter", type="integer", nullable=false, options={"unsigned":true, "default":0})
+     * @ORM\Column(name="is_used", type="boolean", options={"default":false})
      */
-    private $counter;
+    private $is_used;
 
 
     /**
@@ -49,48 +43,6 @@ class ShortyEntity
      */
     private $createdAt;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-
-    /**
-     * @param integer $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-
-    /**
-     * Get Url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
 
     /**
      * Get code
@@ -113,17 +65,43 @@ class ShortyEntity
     }
 
     /**
-     * Get code
+     * Get id
      *
      * @return integer
      */
-    public function getCounter()
+    public function getId()
     {
-        return $this->counter;
+        return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
 
-     /**
+        return $this;
+    }
+
+    /**
+     * @param boolean $isUsed
+     */
+    public function setIsUsed($isUsed)
+    {
+        $this->is_used = $isUsed;
+
+        return $this;
+    }
+
+    /**
+     * Get is_used
+     *
+     * @return boolean
+     */
+    public function getIsUsed()
+    {
+        return $this->is_used;
+    }
+
+    /**
      * Get createdAt
      *
      * @return integer
@@ -143,4 +121,3 @@ class ShortyEntity
         return $this;
     }
 }
-
