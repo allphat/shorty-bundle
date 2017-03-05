@@ -28,6 +28,10 @@ class ShortyManager
 		return $this->shortyRepository->findByCode($code)[0];
 	}
 
+	/**
+	 * [createEntity description]
+	 * @return ShortyEntity $short
+	 */
 	public function createEntity()
 	{
 		$short = new ShortyEntity();
@@ -41,7 +45,7 @@ class ShortyManager
 	}
 
 	/**
-	 * [createEntity description]
+	 * creates an entity
 	 * @return [type] [description]
 	 */
 	public function createAndUseEntity()
@@ -65,22 +69,24 @@ class ShortyManager
 
 
 	/**
-	 * [save description]
-	 * @return [type] [description]
+	 *
+	 * @param  boolean $useDb param passed by config
+	 * @return ShortyEntity $short
 	 */
-	public function save()
+	public function save($useDb)
 	{
-		$shorted = $this->shortyRepository->findUnusedOne();
-		if (is_null($shorted)) {
-			$short = $this->createAndUseEntity();
+		$short = $this->createAndUseEntity();
 
-		} else {
-			$short = $shorted;
+		if ($useDb) {
+			$shorted = $this->shortyRepository->findUnusedOne();
+			if (!is_null($shorted)) {
+				$short = $shorted;
+			}
 			$short->setIsUsed(true);
-		}
 
-		$this->shortyRepository->persist($short);
-		$this->shortyRepository->save();
+			$this->shortyRepository->persist($short);
+			$this->saveEntity();
+		}
 
 		return $short;
 	}

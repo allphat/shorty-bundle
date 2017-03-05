@@ -11,11 +11,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ShortyController extends Controller
 {
     private $shortyManager;
+    private $useDb;
 
-    public function __construct(ShortyManager $shortyManager)
+    public function __construct(ShortyManager $shortyManager, $useDb)
     {
         $this->shortyManager = $shortyManager;
+        $this->useDb = $useDb;
     }
+
 
 
     /**
@@ -44,7 +47,7 @@ class ShortyController extends Controller
     {
         try {
 
-            $short = $this->shortyManager->save();
+            $short = $this->shortyManager->save($this->useDb);
 
             $response = [
                 $short->getCode()
