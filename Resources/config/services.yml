@@ -10,4 +10,4 @@ services:
 
     shorty.controller:
         class: Alphat\Bundle\ShortyBundle\Controller\ShortyController
-        arguments: ["@shorty.manager"]
+        arguments: ["@shorty.manager", "%shorty.use_db%"]

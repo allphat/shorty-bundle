@@ -22,11 +22,14 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->booleanNode('use_db')
+                    ->defaultValue(false)
+                ->end()
                 ->booleanNode('allow_follow')
                     ->defaultValue(false)
                 ->end()
                 ->booleanNode('allow_secure')
-                    ->defaultValue(true)
+                    ->defaultValue(false)
                 ->end()
                 ->integerNode('allow_lifetime')
                     ->defaultValue(0)

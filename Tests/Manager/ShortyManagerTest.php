@@ -50,6 +50,14 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->getIsUsed());
     }
 
+    public function testSaveNoDb()
+    {
+        $result = $this->manager->save(false);
+
+        $this->assertTrue($result->getIsUsed());
+        $this->assertRegExp('/\w{6}/', $result->getCode());
+    }
+
     public function testSaveKnown()
     {
         $shortyEntity = new ShortyEntity();
@@ -67,7 +75,7 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
         $this->repository->expects($this->once())
             ->method('save');
 
-        $result = $this->manager->save();
+        $result = $this->manager->save(true);
 
         $this->assertTrue($result->getIsUsed());
         $this->assertEquals('vrl38H', $result->getCode());
@@ -85,7 +93,7 @@ class ShortyManagerTest extends \PHPUnit_Framework_TestCase
         $this->repository->expects($this->once())
             ->method('save');
 
-        $result = $this->manager->save();
+        $result = $this->manager->save(true);
 
         $this->assertTrue($result->getIsUsed());
         $this->assertRegExp('/\w{6}/', $result->getCode());
