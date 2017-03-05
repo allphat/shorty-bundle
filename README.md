@@ -1,4 +1,4 @@
-Shorty  [![Build Status](https://travis-ci.org/alphatesla/shorty.svg?branch=master)](https://travis-ci.org/alphatesla/shorty) [![Coverage Status](https://coveralls.io/repos/github/alphatesla/shorty/badge.svg)](https://coveralls.io/github/alphatesla/shorty)
+Shorty  [![Build Status](https://travis-ci.org/alphatesla/shorty.svg?branch=master)](https://travis-ci.org/alphatesla/shorty) [![Coverage Status](https://coveralls.io/repos/github/alphatesla/shorty/badge.svg?branch=master)](https://coveralls.io/github/alphatesla/shorty?branch=master)
 =======
 
 A Symfony project created on January 10, 2017, 8:56 pm.
