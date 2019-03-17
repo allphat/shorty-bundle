@@ -1,8 +1,8 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\Command;
+namespace Allĥat\Bundle\ShortyBundle\Command;
 
-use Alphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Allĥat\Bundle\ShortyBundle\Manager\ShortyManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -45,7 +45,7 @@ class GenerateCodesCommand extends ContainerAwareCommand
 
     /**
      * generates and nsert uri in shorty_generated table
-     * @param Alphat\Bundle\ShortyBundle\Manager\ShortyManager $manager
+     * @param Allĥat\Bundle\ShortyBundle\Manager\ShortyManager $manager
      * @return booolean
      */
     protected function create(ShortyManager $manager)

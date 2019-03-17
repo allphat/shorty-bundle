@@ -1,6 +1,6 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\Shortener;
+namespace Allĥat\Bundle\ShortyBundle\Shortener;
 
 class Shortener
 {

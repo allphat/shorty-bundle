@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Alphat\Bundle\ShortyBundle\Repository;
+namespace Tests\Allĥat\Bundle\ShortyBundle\Repository;
 
-use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
-use Alphat\Bundle\ShortyBundle\Repository\ShortyRepository;
+use Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allĥat\Bundle\ShortyBundle\Repository\ShortyRepository;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\UnitOfWork;
 use Doctrine\ORM\Persisters\Entity\BasicEntityPersister;
 
-class ShortyRepositoryTest extends \PHPUnit_Framework_TestCase
+class ShortyRepositoryTest extends \PHPUnit\Framework\TestCase
 {
     private $em;
     private $unitOfWork;

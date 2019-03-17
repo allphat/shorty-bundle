@@ -1,9 +1,9 @@
 {
-    "name": "alphat/shorty",
+    "name": "allphat/shorty",
     "license": "proprietary",
     "type": "symfony-bundle",
     "autoload": {
-        "psr-4": { "Alphat\\Bundle\\ShortyBundle\\": "" }
+        "psr-4": { "Allĥat\\Bundle\\ShortyBundle\\": "" }
     },
     "autoload-dev": {
         "psr-4": {
@@ -23,7 +23,6 @@
         "symfony/polyfill-apcu": "^1.0"
     },
     "require-dev": {
-         "symfony/phpunit-bridge": "^3.0",
-         "satooshi/php-coveralls" :"~1.0"
-    }
+         "symfony/phpunit-bridge": "^3.0"
+   }
 }
