@@ -1,13 +1,18 @@
 services:
     shorty.repository:
-        class: Alphat\Bundle\ShortyBundle\Repository\ShortyRepository
+        class: Allĥat\Bundle\ShortyBundle\Repository\ShortyRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
-        arguments: [ Alphat\Bundle\ShortyBundle\Entity\ShortyEntity ]
+        arguments: [ Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity ]
 
     shorty.manager:
-        class: Alphat\Bundle\ShortyBundle\Manager\ShortyManager
+        class: Allĥat\Bundle\ShortyBundle\Manager\ShortyManager
         arguments: ["@shorty.repository"]
 
     shorty.controller:
-        class: Alphat\Bundle\ShortyBundle\Controller\ShortyController
+        class: Allĥat\Bundle\ShortyBundle\Controller\ShortyController
         arguments: ["@shorty.manager", "%shorty.use_db%"]
+
+    shorty.shorterner:
+	class: Allphat\Bundke\ShortyBundle\Shortener\Shortener
+	calls:
+            - method: generateRandomCode

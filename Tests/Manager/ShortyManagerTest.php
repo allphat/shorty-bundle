@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Alphat\Bundle\ShortyBundle\Manager;
+namespace Tests\Allĥat\Bundle\ShortyBundle\Manager;
 
-use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
-use Alphat\Bundle\ShortyBundle\Manager\ShortyManager;
-use Alphat\Bundle\ShortyBundle\Repository\ShortyRepository;
+use Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allĥat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Allĥat\Bundle\ShortyBundle\Repository\ShortyRepository;
 
 
-class ShortyManagerTest extends \PHPUnit_Framework_TestCase
+class ShortyManagerTest extends \PHPUnit\Framework\TestCase
 {
     private $repository;
     private $manager;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Alphat\Bundle\ShortyBundle\Shortener;
+namespace Tests\Allĥat\Bundle\ShortyBundle\Shortener;
 
-use Alphat\Bundle\ShortyBundle\Shortener\Shortener;
+use Allĥat\Bundle\ShortyBundle\Shortener\Shortener;
 
-class ShortenerTest extends \PHPUnit_Framework_TestCase
+class ShortenerTest extends \PHPUnit\Framework\TestCase
 {
     public function testGenerateRamdomCode()
     {

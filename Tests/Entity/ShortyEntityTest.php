@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Alphat\Bundle\ShortyBundle\Entity;
+namespace Tests\Allĥat\Bundle\ShortyBundle\Entity;
 
-use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity;
 
 
-class ShortyEntityTest extends \PHPUnit_Framework_TestCase
+class ShortyEntityTest extends \PHPUnit\Framework\TestCase
 {
     private $entity;
 

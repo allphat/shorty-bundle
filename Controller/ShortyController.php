@@ -1,8 +1,8 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\Controller;
+namespace Allĥat\Bundle\ShortyBundle\Controller;
 
-use Alphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Allĥat\Bundle\ShortyBundle\Manager\ShortyManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

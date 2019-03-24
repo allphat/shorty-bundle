@@ -1,8 +1,8 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\Repository;
+namespace Allĥat\Bundle\ShortyBundle\Repository;
 
-use Alphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;

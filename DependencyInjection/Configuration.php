@@ -1,6 +1,6 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\DependencyInjection;
+namespace Allĥat\Bundle\ShortyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

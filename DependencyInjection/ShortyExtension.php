@@ -1,6 +1,6 @@
 <?php
 
-namespace Alphat\Bundle\ShortyBundle\DependencyInjection;
+namespace Allĥat\Bundle\ShortyBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
