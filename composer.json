@@ -19,7 +19,7 @@
         "symfony/polyfill-apcu": "^1.0"
     },
     "require-dev": {
-         "symfony/phpunit-bridge": "^3.0"
+         "symfony/phpunit-bridge": "^3.4.26"
    },
     "config": {
         "allow-plugins": {
