@@ -12,17 +12,19 @@
     },
     "require": {
         "php": ">=7.2",
-        "doctrine/orm": "^2.5",
-        "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/doctrine-cache-bundle": "^1.2",
-        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "doctrine/doctrine-bundle": "^2.0",
         "guzzlehttp/guzzle": "~6.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
-        "symfony/symfony": "4.2",
+        "symfony/symfony": "5.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/polyfill-apcu": "^1.0"
     },
     "require-dev": {
-         "symfony/phpunit-bridge": "^3.0"
-   }
+         "symfony/phpunit-bridge": "^3.4.26"
+   },
+    "config": {
+        "allow-plugins": {
+            "ocramius/package-versions": true,
+            "composer/package-versions-deprecated": true
+        }
+    }
 }

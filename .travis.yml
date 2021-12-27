@@ -23,7 +23,7 @@ branches:
 
 notifications:
   email:
-    -  ybrigant@gmail.comi
+    -  ybrigant@gmail.com
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v
