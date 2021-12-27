@@ -1,6 +1,6 @@
 <?php
 
-namespace Allĥat\Bundle\ShortyBundle\Shortener;
+namespace Allphat\Bundle\ShortyBundle\Shortener;
 
 class Shortener
 {
@@ -17,7 +17,7 @@ class Shortener
         $i = self::MAX_SIZE;
         $dico = self::DICO;
         while ($i > 0) {
-            $return .= $dico{random_int(0, 61)};
+            $return .= $dico[random_int(0, 61)];
             $i--;
         }
 

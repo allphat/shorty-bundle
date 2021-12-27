@@ -1,15 +1,15 @@
 services:
     shorty.repository:
-        class: Allĥat\Bundle\ShortyBundle\Repository\ShortyRepository
+        class: Allphat\Bundle\ShortyBundle\Repository\ShortyRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
-        arguments: [ Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity ]
+        arguments: [ Allphat\Bundle\ShortyBundle\Entity\ShortyEntity ]
 
     shorty.manager:
-        class: Allĥat\Bundle\ShortyBundle\Manager\ShortyManager
+        class: Allphat\Bundle\ShortyBundle\Manager\ShortyManager
         arguments: ["@shorty.repository"]
 
     shorty.controller:
-        class: Allĥat\Bundle\ShortyBundle\Controller\ShortyController
+        class: Allphat\Bundle\ShortyBundle\Controller\ShortyController
         arguments: ["@shorty.manager", "%shorty.use_db%"]
 
     shorty.shorterner:

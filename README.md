@@ -23,7 +23,7 @@ Install
         allow_secure:   true
         allow_lifetime: 0
 
-- declare  shorty in your kernel new Allĥat\Bundle\ShortyBundle\ShortyBundle(),
+- declare  shorty in your kernel new Allphat\Bundle\ShortyBundle\ShortyBundle(),
 
 - launch doctrine migration to set the table in mysqlte db
 

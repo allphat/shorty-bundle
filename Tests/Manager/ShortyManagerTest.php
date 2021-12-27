@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Allĥat\Bundle\ShortyBundle\Manager;
+namespace Tests\Allphat\Bundle\ShortyBundle\Manager;
 
-use Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity;
-use Allĥat\Bundle\ShortyBundle\Manager\ShortyManager;
-use Allĥat\Bundle\ShortyBundle\Repository\ShortyRepository;
+use Allphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Allphat\Bundle\ShortyBundle\Repository\ShortyRepository;
 
 
 class ShortyManagerTest extends \PHPUnit\Framework\TestCase
@@ -12,7 +12,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
     private $repository;
     private $manager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->repository = $this->getMockBuilder(ShortyRepository::class)
                      ->disableOriginalConstructor()
@@ -20,15 +20,6 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
                      ->getMock();
 
         $this->manager = new ShortyManager($this->repository);
-    }
-
-    public function testFindByCode()
-    {
-        $this->repository->expects($this->once())
-            ->method('findByCode')
-            ->with('test');
-
-        $this->manager->findByCode('test');
     }
 
     public function testEncode()

@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Allĥat\Bundle\ShortyBundle\Entity;
+namespace Tests\Allphat\Bundle\ShortyBundle\Entity;
 
-use Allĥat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allphat\Bundle\ShortyBundle\Entity\ShortyEntity;
 
 
 class ShortyEntityTest extends \PHPUnit\Framework\TestCase
 {
     private $entity;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entity = new ShortyEntity();
 
