@@ -5,10 +5,10 @@ namespace Allphat\Bundle\ShortyBundle\Controller;
 use Allphat\Bundle\ShortyBundle\Manager\ShortyManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ShortyController extends Controller
+class ShortyController extends AbstractController
 {
     private $shortyManager;
     private $useDb;

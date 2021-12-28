@@ -21,7 +21,9 @@
         "doctrine/orm": "^2.10"
     },
     "require-dev": {
-         "symfony/phpunit-bridge": "^3.4.26"
+         "symfony/phpunit-bridge": "^3.4.26",
+        "phpunit/phpcov": "^8.2",
+        "php-coveralls/php-coveralls": "^2.5"
    },
    "config": {
         "allow-plugins": {
@@ -30,7 +32,7 @@
         }
    },
    "scripts": {
-    "tests": "phpunit",
+    "tests": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover  build/logs/clover.xml -vvv",
     "testsVerbose": "@tests -vvv"
    }
 }

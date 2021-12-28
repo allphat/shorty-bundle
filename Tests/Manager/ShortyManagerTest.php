@@ -24,7 +24,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testEncode()
     {
-        $this->assertRegExp('/\w{6}/', $this->manager->encode());
+        $this->assertMatchesRegularExpression('/\w{6}/', $this->manager->encode());
     }
 
     public function testCreateEntity()
@@ -46,7 +46,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
         $result = $this->manager->save(false);
 
         $this->assertTrue($result->getIsUsed());
-        $this->assertRegExp('/\w{6}/', $result->getCode());
+	$this->assertMatchesRegularExpression('/\w{6}/', $result->getCode());
     }
 
     public function testSaveKnown()
@@ -87,7 +87,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
         $result = $this->manager->save(true);
 
         $this->assertTrue($result->getIsUsed());
-        $this->assertRegExp('/\w{6}/', $result->getCode());
+        $this->assertMatchesRegularExpression('/\w{6}/', $result->getCode());
 
     }
 }
