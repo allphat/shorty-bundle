@@ -1,6 +1,6 @@
 <?php
 
-namespace Allĥat\Bundle\ShortyBundle;
+namespace Allphat\Bundle\ShortyBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace  Allĥat\Bundle\ShortyBundle\Entity;
+namespace  Allphat\Bundle\ShortyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Shorty
  *
  * @ORM\Table(name="shorty",uniqueConstraints={@ORM\UniqueConstraint(name="code_generated_idx", columns={"code"})})
- * @ORM\Entity(repositoryClass="Allĥat\Bundle\ShortyBundle\Repository\ShortyRepository")
+ * @ORM\Entity(repositoryClass="Allpĥat\Bundle\ShortyBundle\Repository\ShortyRepository")
  */
 class ShortyEntity
 {

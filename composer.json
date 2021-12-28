@@ -1,9 +1,10 @@
 {
     "name": "allphat/shorty",
+    "description": "url shortener bundle for symfony",
     "license": "proprietary",
     "type": "symfony-bundle",
     "autoload": {
-        "psr-4": { "Allĥat\\Bundle\\ShortyBundle\\": "" }
+        "psr-4": { "Allphat\\Bundle\\ShortyBundle\\": "" }
     },
     "autoload-dev": {
         "psr-4": {
@@ -16,15 +17,20 @@
         "guzzlehttp/guzzle": "~6.0",
         "symfony/symfony": "5.*",
         "symfony/monolog-bundle": "^3.0",
-        "symfony/polyfill-apcu": "^1.0"
+        "symfony/polyfill-apcu": "^1.0",
+        "doctrine/orm": "^2.10"
     },
     "require-dev": {
          "symfony/phpunit-bridge": "^3.4.26"
    },
-    "config": {
+   "config": {
         "allow-plugins": {
             "ocramius/package-versions": true,
             "composer/package-versions-deprecated": true
         }
-    }
+   },
+   "scripts": {
+    "tests": "phpunit",
+    "testsVerbose": "@tests -vvv"
+   }
 }
