@@ -22,9 +22,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->booleanNode('use_db')
-                    ->defaultValue(false)
-                ->end()
                 ->booleanNode('allow_follow')
                     ->defaultValue(false)
                 ->end()
