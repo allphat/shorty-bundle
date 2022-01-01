@@ -10,7 +10,7 @@ services:
 
     shorty.controller:
         class: Allphat\Bundle\ShortyBundle\Controller\ShortyController
-        arguments: ["@shorty.manager", "%shorty.use_db%"]
+        arguments: ["@shorty.manager"]
 
     shorty.shorterner:
 	class: Allphat\Bundke\ShortyBundle\Shortener\Shortener
