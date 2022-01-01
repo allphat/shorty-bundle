@@ -20,27 +20,15 @@ class ShortyRepository extends ServiceEntityRepository
         parent::__construct($registry, ShortyEntity::class);
     }
 
-    /**
-     * [persist description]
-     * @param  ShortyEntity $shortyEntity [description]
-     * @return [type]                     [description]
-     */
-    public function persist(ShortyEntity $shortyEntity)
+    public function persist(ShortyEntity $shortyEntity): void
     {
         $this->getEntityManager()->persist($shortyEntity);
     }
 
-
-    /**
-     * persists links in db
-     *
-     * @param  ShortyEntity $short [description]
-     * @return [type]                [description]
-     */
-    public function save()
+    public function save(): bool
     {
         try {
-            $this->getDoctrine()->getManager()->flush();
+            $this->getEntityManager()->flush();
 
             return true;
         } catch (UniqueConstraintViolationException $e) {
@@ -48,12 +36,7 @@ class ShortyRepository extends ServiceEntityRepository
         }
     }
 
-
-    /**
-     * [findLast description]
-     * @return [type] [description]
-     */
-    public function findLast()
+    public function findLast(): ?ShortyEntity
     {
     	$entityManager = $this->getEntityManager();
         $query = $this->createQueryBuilder('sg');
@@ -61,16 +44,11 @@ class ShortyRepository extends ServiceEntityRepository
         $query->setMaxResults(1);
         $query->orderBy('sg.id', 'DESC');
 
-        return $query->getQuery()->getResult()[0];
+        return $query->getQuery()->getSingleResult();
     }
 
-    /**
-     * [getUnusedOne description]
-     * @return [type] [description]
-     */
-    public function findUnusedOne()
+    public function findUnusedOne(): ?ShortyEntity
     {
         return $this->findOneBy(['is_used' => false]);
     }
 }
-

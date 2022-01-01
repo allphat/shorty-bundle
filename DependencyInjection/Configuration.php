@@ -17,10 +17,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('shorty');
+        $treeBuilder = new TreeBuilder('shorty');
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->booleanNode('allow_follow')
                     ->defaultValue(false)

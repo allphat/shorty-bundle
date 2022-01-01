@@ -19,6 +19,8 @@ class ShortyEntity
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @var int
      */
     private $id;
 
@@ -27,12 +29,16 @@ class ShortyEntity
      * @ORM\Column(name="code", type="string", nullable = false, options={"aaaaaa"})
      * @Assert\NotBlank()
      * @Assert\Url()
+     *
+     * @var string
      */
     private $code;
 
 
     /**
      * @ORM\Column(name="is_used", type="boolean", options={"default":false})
+     *
+     * @var bool
      */
     private $is_used;
 
@@ -40,6 +46,8 @@ class ShortyEntity
     /**
      *
      * @ORM\Column(name="created_at", type="integer", nullable=false)
+     *
+     * @var int
      */
     private $createdAt;
 
@@ -54,10 +62,7 @@ class ShortyEntity
         return $this->code;
     }
 
-    /**
-     * @param string $code
-     */
-    public function setCode($code)
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
@@ -74,47 +79,31 @@ class ShortyEntity
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @param boolean $isUsed
-     */
-    public function setIsUsed($isUsed)
+    public function setIsUsed(bool $isUsed): self
     {
         $this->is_used = $isUsed;
 
         return $this;
     }
 
-    /**
-     * Get is_used
-     *
-     * @return boolean
-     */
-    public function getIsUsed()
+    public function getIsUsed(): bool
     {
         return $this->is_used;
     }
 
-    /**
-     * Get createdAt
-     *
-     * @return integer
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): int 
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param integer $createdAt
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(int $createdAt): self
     {
         $this->createdAt = $createdAt;
 

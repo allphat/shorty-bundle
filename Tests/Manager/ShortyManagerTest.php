@@ -9,9 +9,12 @@ use Allphat\Bundle\ShortyBundle\Repository\ShortyRepository;
 
 class ShortyManagerTest extends \PHPUnit\Framework\TestCase
 {
-    private $repository;
-    private $manager;
-
+    /** @phpstan-ignore-next-line */
+    private $repository = null;
+    
+    /** @phpstan-ignore-next-line */
+    private $manager = null;
+    
     public function setUp(): void
     {
         $this->repository = $this->getMockBuilder(ShortyRepository::class)
@@ -22,34 +25,34 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
         $this->manager = new ShortyManager($this->repository);
     }
 
-    public function testEncode()
+    public function testEncode(): void
     {
         $this->assertMatchesRegularExpression('/\w{6}/', $this->manager->encode());
     }
 
-    public function testCreateEntity()
+    public function testCreateEntity(): void
     {
         $result = $this->manager->createEntity();
 
         $this->assertFalse($result->getIsUsed());
     }
 
-    public function testCreateAndUseEntity()
+    public function testCreateAndUseEntity(): void
     {
         $result = $this->manager->createAndUseEntity();
 
         $this->assertTrue($result->getIsUsed());
     }
 
-    public function testSaveNoDb()
+    public function testSaveNoDb(): void
     {
-        $result = $this->manager->save(false);
+        $result = $this->manager->save();
 
         $this->assertTrue($result->getIsUsed());
 	$this->assertMatchesRegularExpression('/\w{6}/', $result->getCode());
     }
 
-    public function testSaveKnown()
+    public function testSaveKnown(): void
     {
         $shortyEntity = new ShortyEntity();
         $shortyEntity->setCode('vrl38H');
@@ -72,7 +75,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('vrl38H', $result->getCode());
     }
 
-    public function testSaveNew()
+    public function testSaveNew(): void
     {
         $this->repository->expects($this->once())
             ->method('findUnusedOne')

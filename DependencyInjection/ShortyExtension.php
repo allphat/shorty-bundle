@@ -15,9 +15,9 @@ use Symfony\Component\DependencyInjection\Loader;
 class ShortyExtension extends Extension
 {
     /**
-     * {@inheritdoc}
+     * @param array<string,mixed> $configs
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);

@@ -8,31 +8,22 @@ use Allphat\Bundle\ShortyBundle\Shortener\Shortener;
 
 class ShortyManager
 {
+	/**
+	 * @var ShortyRepository
+	 */
 	private $shortyRepository;
 
-	/**
-	 * @param ShortyRepository $repository
-	 */
 	public function __construct(ShortyRepository $shortyRepository)
 	{
 		$this->shortyRepository = $shortyRepository;
 	}
 
-
-	/**
-	 * @param  string $code
-	 * @return ShortyEntity
-	 */
-	public function findByCode($code)
+	public function findByCode(string $code): ?ShortyEntity
 	{
-		return $this->shortyRepository->findByCode($code)[0];
+		return $this->shortyRepository->findOneBy(['code' => $code]);
 	}
 
-	/**
-	 * [createEntity description]
-	 * @return ShortyEntity $short
-	 */
-	public function createEntity()
+	public function createEntity(): ShortyEntity
 	{
 		$short = new ShortyEntity();
         $short->setCreatedAt((new \DateTime())->getTimestamp());
@@ -44,62 +35,34 @@ class ShortyManager
 		return $short;
 	}
 
-	/**
-	 * creates an entity
-	 * @return [type] [description]
-	 */
-	public function createAndUseEntity()
+	public function createAndUseEntity(): ShortyEntity
 	{
 		$short = new ShortyEntity();
-        $short->setCreatedAt((new \DateTime())->getTimestamp());
+      $short->setCreatedAt((new \DateTime())->getTimestamp());
 		$short->setCode($this->encode());
 		$short->setIsUsed(true);
 
 		return $short;
 	}
 
-
-	/**
-	 * [saveEntity description]
-	 */
-	public function saveEntity()
-	{
-		$this->shortyRepository->save();
-	}
-
-
-	/**
-	 *
-	 * @param  boolean $useDb param passed by config
-	 * @return ShortyEntity $short
-	 */
-	public function save($useDb)
+	public function save(): ShortyEntity
 	{
 		$short = $this->createAndUseEntity();
 
-		if ($useDb) {
-			$shorted = $this->shortyRepository->findUnusedOne();
-			if (!is_null($shorted)) {
-				$short = $shorted;
-			}
-			$short->setIsUsed(true);
-
-			$this->shortyRepository->persist($short);
-			$this->saveEntity();
+		$shorted = $this->shortyRepository->findUnusedOne();
+		if (!is_null($shorted)) {
+			$short = $shorted;
 		}
+		$short->setIsUsed(true);
+
+		$this->shortyRepository->persist($short);
+		$this->shortyRepository->save();
 
 		return $short;
 	}
 
-
-	/**
-	 * creates a 6 characters string
-	 *
-	 * @return string
-	 */
-	public function encode()
+	public function encode(): string
 	{
 		return Shortener::generateRandomCode();
 	}
 }
-
