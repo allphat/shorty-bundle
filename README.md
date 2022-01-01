@@ -1,4 +1,4 @@
-Shorty  [![Build Status](https://travis-ci.org/allphat/shorty.svg?branch=master)](https://travis-ci.org/allphat/shorty) [![Coverage Status](https://coveralls.io/repos/github/allphat/shorty/badge.svg?branch=master)](https://coveralls.io/github/allphat/shorty?branch=master)
+Shorty  ![example workflow](https://github.com/github/docs/actions/workflows/php.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/allphat/shorty/badge.svg?branch=master)](https://coveralls.io/github/allphat/shorty?branch=master)
 =======
 
 A Symfony project created on January 10, 2017, 8:56 pm.
