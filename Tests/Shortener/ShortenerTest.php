@@ -8,6 +8,6 @@ class ShortenerTest extends \PHPUnit\Framework\TestCase
 {
     public function testGenerateRamdomCode()
     {
-        $this->assertRegexp('/\w{6}/', Shortener::generateRandomCode());
+        $this->assertMatchesRegularExpression('/\w{6}/', Shortener::generateRandomCode());
     }
 }
