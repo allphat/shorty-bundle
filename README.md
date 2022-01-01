@@ -1,4 +1,4 @@
-Shorty  ![example workflow](https://github.com/github/docs/actions/workflows/php.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/allphat/shorty/badge.svg?branch=master)](https://coveralls.io/github/allphat/shorty?branch=master)
+Shorty  ![Github build](https://github.com/allphat/shorty/actions/workflows/php.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/allphat/shorty/badge.svg?branch=master)](https://coveralls.io/github/allphat/shorty?branch=master)
 =======
 
 A Symfony project created on January 10, 2017, 8:56 pm.
