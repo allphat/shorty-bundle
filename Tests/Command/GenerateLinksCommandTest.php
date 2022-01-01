@@ -9,9 +9,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class GenerateLinksCommandTest extends KernelTestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $this->markTestSkipped('to be launched in integration suite');
+        
+        /** @phpstan-ignore-next-line */
         self::bootKernel();
         $application = new Application(self::$kernel);
 

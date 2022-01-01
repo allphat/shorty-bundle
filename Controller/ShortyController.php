@@ -10,16 +10,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ShortyController extends AbstractController
 {
+	/**
+	 * @var ShortyManager
+	 */
+	
     private $shortyManager;
-    private $useDb;
 
-    public function __construct(ShortyManager $shortyManager, $useDb)
+    public function __construct(ShortyManager $shortyManager)
     {
         $this->shortyManager = $shortyManager;
-        $this->useDb = $useDb;
     }
-
-
 
     /**
      * Route("/{code}", name="redirect", requirements={"code"= "^[\w]{6}$"})
@@ -28,11 +28,12 @@ class ShortyController extends AbstractController
     /*public function redirectAction($code)
     {
         $short = $this->get('shorty.manager')->findByCode($code);
-        $this->get('shorty_manager')->updateCounter($short);
 
         if (!$short) {
             throw $this->createNotFoundException('Oopps this link does does not exist');
         }
+        
+        $this->get('shorty_manager')->updateCounter($short);
 
         //@TODO create method to ckeck against options
 
@@ -43,11 +44,11 @@ class ShortyController extends AbstractController
      * @Route("/", name="create", service="shorty.controller")
      * @Method({"POST"})
      */
-    public function createAction()
+    public function createAction(): JsonResponse
     {
         try {
 
-            $short = $this->shortyManager->save($this->useDb);
+            $short = $this->shortyManager->save();
 
             $response = [
                 $short->getCode()
@@ -61,12 +62,11 @@ class ShortyController extends AbstractController
         }
     }
 
-
     /**
-     * @param array $params   [description]
+     * param array $params   [description]
      */
-    protected function checkOptions($params)
-    {
+    //protected function checkOptions($params)
+    //{
         /*$response['allow_lifetime'] = $this->getParameter('shorty.allow_lifetime');
         if (isset($params['allow_lifetime'])) {
             throw new \Exception('');
@@ -81,5 +81,5 @@ class ShortyController extends AbstractController
         if (isset($params['allow_follow'])  && is_null($params['allow_follow'])) {
             throw new \Exception('Redirection not allowed');
         }*/
-    }
+    //}
 }

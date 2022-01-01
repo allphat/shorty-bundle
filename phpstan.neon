@@ -1,0 +1,10 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    level: 6
+    paths:
+        - ./
+    excludePaths:
+        - vendor
+        - build
+    ignoreErrors:
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\).#'

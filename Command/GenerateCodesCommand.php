@@ -3,6 +3,7 @@
 namespace Allphat\Bundle\ShortyBundle\Command;
 
 use Allphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,6 +13,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GenerateCodesCommand extends Command
 {
     const DEFAULT_LIMIT = 1000;
+    
+    /**
+     * @var ShortyManager
+     */
+    private $shortyManager;
+
+    public function __construct(ShortyManager $shortyManager)
+    {
+        $this->shortyManager = $shortyManager;
+
+        parent::__construct();
+    }
 
     protected function configure(): void
     {
@@ -29,36 +42,30 @@ class GenerateCodesCommand extends Command
             $number = self::DEFAULT_LIMIT;
         }
 
-        $manager = $this->getContainer()->get('shorty.manager');
-
         while ($number > 0) {
-            $created = $this->create($manager);
+            $created = $this->create();
             if ($created) {
                 $number--;
             }
 
             if ($number % 100 === 0) {
-                $manager->saveEntity();
+                $this->shortyManager->save();
             }
-	}
+	   }
 
-	return Command::SUCCESS;
+	   return Command::SUCCESS;
     }
 
     /**
-     * generates and nsert uri in shorty_generated table
-     * @param Allphat\Bundle\ShortyBundle\Manager\ShortyManager $manager
-     * @return booolean
+     * generates and insert uri in shorty_generated table
      */
-    protected function create(ShortyManager $manager)
+    protected function create(): bool
     {
         try {
-            $manager->createEntity();
+            $this->shortyManager->createEntity();
 
             return true;
-
-        } catch (\UniqueConstraintViolationException $e) {
-           echo'duplicate';
+        } catch (UniqueConstraintViolationException $e) {
            return false;
         }
     }

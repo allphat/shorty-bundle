@@ -24,4 +24,3 @@ class Shortener
         return $return;
     }
 }
-

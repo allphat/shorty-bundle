@@ -1,4 +1,4 @@
-services:
+services:C
     shorty.repository:
         class: Allphat\Bundle\ShortyBundle\Repository\ShortyRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
@@ -10,7 +10,7 @@ services:
 
     shorty.controller:
         class: Allphat\Bundle\ShortyBundle\Controller\ShortyController
-        arguments: ["@shorty.manager"]
+	
 
     shorty.shorterner:
 	class: Allphat\Bundke\ShortyBundle\Shortener\Shortener
