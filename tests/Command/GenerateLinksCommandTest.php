@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Allphat\Bundle\ShortyBundle\Command;
+namespace Tests\Allphat\ShortyBundle\Command;
 
-use Allphat\Bundle\ShortyBundle\Command\GenerateLinksCommand;
+use Allphat\ShortyBundle\Command\GenerateLinksCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Allphat\Bundle\ShortyBundle\Command;
+namespace Allphat\ShortyBundle\Command;
 
-use Allphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Allphat\ShortyBundle\Manager\ShortyManager;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

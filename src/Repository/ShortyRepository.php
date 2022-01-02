@@ -1,8 +1,8 @@
 <?php
 
-namespace Allphat\Bundle\ShortyBundle\Repository;
+namespace Allphat\ShortyBundle\Repository;
 
-use Allphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allphat\ShortyBundle\Entity\ShortyEntity;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
