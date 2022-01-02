@@ -1,8 +1,8 @@
 <?php
 
-namespace Allphat\Bundle\ShortyBundle\Controller;
+namespace Allphat\ShortyBundle\Controller;
 
-use Allphat\Bundle\ShortyBundle\Manager\ShortyManager;
+use Allphat\ShortyBundle\Manager\ShortyManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +22,7 @@ class ShortyController extends AbstractController
     }
 
     /**
-     * Route("/{code}", name="redirect", requirements={"code"= "^[\w]{6}$"})
+     * Route("/{code}", name="allphat_shorty_redirect", requirements={"code"= "^[\w]{6}$"})
      * Method({"GET","HEAD"})
      */
     /*public function redirectAction($code)
@@ -41,7 +41,7 @@ class ShortyController extends AbstractController
     }*/
 
     /**
-     * @Route("/", name="create", service="shorty.controller")
+     * @Route("/", name="allphat_shorty_create", service="shorty.controller")
      * @Method({"POST"})
      */
     public function createAction(): JsonResponse

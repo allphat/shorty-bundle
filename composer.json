@@ -1,14 +1,14 @@
 {
-    "name": "allphat/shorty",
+    "name": "allphat/shorty-bundle",
     "description": "url shortener bundle for symfony",
     "license": "proprietary",
     "type": "symfony-bundle",
     "autoload": {
-        "psr-4": { "Allphat\\Bundle\\ShortyBundle\\": "" }
+        "psr-4": { "Allphat\\ShortyBundle\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Allphat\\ShortyBundle\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -35,5 +35,13 @@
    "scripts": {
     "tests": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover  build/logs/clover.xml -vvv",
     "testsVerbose": "@tests -vvv"
-   }
+   },
+   "extra": {
+        "symfony": {
+            "endpoint": [
+                "https://api.github.com/repos/allphat/shorty-recipe/contents/index.json",
+                "flex://defaults"
+            ]
+        }
+    }
 }

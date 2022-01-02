@@ -1,10 +1,10 @@
 <?php
 
-namespace Allphat\Bundle\ShortyBundle\Manager;
+namespace Allphat\ShortyBundle\Manager;
 
-use Allphat\Bundle\ShortyBundle\Entity\ShortyEntity;
-use Allphat\Bundle\ShortyBundle\Repository\ShortyRepository;
-use Allphat\Bundle\ShortyBundle\Shortener\Shortener;
+use Allphat\ShortyBundle\Entity\ShortyEntity;
+use Allphat\ShortyBundle\Repository\ShortyRepository;
+use Allphat\ShortyBundle\Shortener\Shortener;
 
 class ShortyManager
 {

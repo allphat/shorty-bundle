@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Allphat\Bundle\ShortyBundle\Manager;
+namespace Tests\Allphat\ShortyBundle\Manager;
 
-use Allphat\Bundle\ShortyBundle\Entity\ShortyEntity;
-use Allphat\Bundle\ShortyBundle\Manager\ShortyManager;
-use Allphat\Bundle\ShortyBundle\Repository\ShortyRepository;
+use Allphat\ShortyBundle\Entity\ShortyEntity;
+use Allphat\ShortyBundle\Manager\ShortyManager;
+use Allphat\ShortyBundle\Repository\ShortyRepository;
 
 
 class ShortyManagerTest extends \PHPUnit\Framework\TestCase

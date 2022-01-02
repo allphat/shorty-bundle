@@ -6,12 +6,12 @@
     </include>
     <exclude>
       <directory>./vendor</directory>
-      <directory>./Tests</directory>
+      <directory>./tests</directory>
     </exclude>
   </coverage>
   <testsuites>
     <testsuite name="Test Suite">
-      <directory suffix=".php">./Tests</directory>
+      <directory suffix=".php">./tests</directory>
     </testsuite>
   </testsuites>
 </phpunit>

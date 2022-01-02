@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Allphat\Bundle\ShortyBundle\Entity;
+namespace Tests\Allphat\ShortyBundle\Entity;
 
-use Allphat\Bundle\ShortyBundle\Entity\ShortyEntity;
+use Allphat\ShortyBundle\Entity\ShortyEntity;
 
 
 class ShortyEntityTest extends \PHPUnit\Framework\TestCase

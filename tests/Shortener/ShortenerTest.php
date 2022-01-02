@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Allphat\Bundle\ShortyBundle\Shortener;
+namespace Tests\Allphat\ShortyBundle\Shortener;
 
-use Allphat\Bundle\ShortyBundle\Shortener\Shortener;
+use Allphat\ShortyBundle\Shortener\Shortener;
 
 class ShortenerTest extends \PHPUnit\Framework\TestCase
 {
