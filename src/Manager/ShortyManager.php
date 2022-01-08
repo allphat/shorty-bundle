@@ -18,16 +18,16 @@ class ShortyManager
 		$this->shortyRepository = $shortyRepository;
 	}
 
-	public function findByCode(string $code): ?ShortyEntity
+	public function findByCode(string $code, bool $allow_secure_only): ?ShortyEntity
 	{
-		return $this->shortyRepository->findOneBy(['code' => $code]);
+		return $this->shortyRepository->getByCode(['code' => $code, 'allow_secure_only' => $allow_secure_only]);
 	}
 
 	public function createEntity(): ShortyEntity
 	{
 		$short = new ShortyEntity();
         $short->setCreatedAt((new \DateTime())->getTimestamp());
-		$short->setCode($this->encode());
+		$short->setCode($this->encodeString());
 		$short->setIsUsed(false);
 
 		$this->shortyRepository->persist($short);
@@ -38,8 +38,8 @@ class ShortyManager
 	public function createAndUseEntity(): ShortyEntity
 	{
 		$short = new ShortyEntity();
-      $short->setCreatedAt((new \DateTime())->getTimestamp());
-		$short->setCode($this->encode());
+        $short->setCreatedAt((new \DateTime())->getTimestamp());
+		$short->setCode($this->encodeString());
 		$short->setIsUsed(true);
 
 		return $short;
@@ -60,8 +60,18 @@ class ShortyManager
 
 		return $short;
 	}
+	
+	public function updateCounter(ShortyEntity $short): ShortyEntity
+	{
+        $short->incrementCounter();
+        
+        $this->shortyRepository->persist($short);
+        $this->shortyRepository->save();
+        
+        return $short;
+	}
 
-	public function encode(): string
+	public function encodeString(): string
 	{
 		return Shortener::generateRandomCode();
 	}

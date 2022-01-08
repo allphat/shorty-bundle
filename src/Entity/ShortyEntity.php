@@ -25,13 +25,31 @@ class ShortyEntity
 
     /**
      *
-     * @ORM\Column(name="code", type="string", nullable = false, options={"aaaaaa"})
+     * @ORM\Column(name="short_url", type="string", nullable = true)
+     * @Assert\Url()
+     *
+     * @var string
+     */
+    private $shortUrl;
+    
+    /**
+     *
+     * @ORM\Column(name="code", type="string", nullable = false)
+     * @Assert\NotBlank()
+     *
+     * @var string
+     */
+    private $code;
+    
+    /**
+     *
+     * @ORM\Column(name="source_url", type="string", nullable = false)
      * @Assert\NotBlank()
      * @Assert\Url()
      *
      * @var string
      */
-    private $code;
+    private $sourceUrl;
 
 
     /**
@@ -39,7 +57,7 @@ class ShortyEntity
      *
      * @var bool
      */
-    private $is_used;
+    private $isUsed;
 
 
     /**
@@ -49,14 +67,36 @@ class ShortyEntity
      * @var int
      */
     private $createdAt;
-
+    
+    /**
+     * @ORM\Column(name="starts_at", type="integer", nullable=false)
+     *
+     * @var int
+     */
+    private $startsAt;
+    
+    /**
+     * @ORM\Column(name="ends_at", type="integer", nullable=true)
+     *
+     * @var int|null
+     */
+    private $endsAt;
 
     /**
-     * Get code
+     * @ORM\Column(name="counter", type="integer", nullable=false, options={"default":0})
      *
-     * @return string
+     * @var int
      */
-    public function getCode()
+    private $counter;
+    
+    /**
+     * @ORM\Column(name="max_calls", type="integer", nullable=true)
+     *
+     * @var int
+     */
+    private $maxCalls;
+    
+    public function getCode(): string   
     {
         return $this->code;
     }
@@ -64,6 +104,25 @@ class ShortyEntity
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function setShortUrl(string $url): self
+    {
+        $this->shortUrl = $url;
+
+        return $this;
+    }
+    
+    public function getSourceUrl(): string   
+    {
+        return $this->sourceUrl;
+    }
+
+    public function setSourceUrl(string $url): self
+    {
+        $this->sourceUrl = $url;
 
         return $this;
     }
@@ -87,14 +146,14 @@ class ShortyEntity
 
     public function setIsUsed(bool $isUsed): self
     {
-        $this->is_used = $isUsed;
+        $this->isUsed = $isUsed;
 
         return $this;
     }
 
     public function getIsUsed(): bool
     {
-        return $this->is_used;
+        return $this->isUsed;
     }
 
     public function getCreatedAt(): int 
@@ -107,5 +166,51 @@ class ShortyEntity
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+    
+    public function setStartsAt(int $startsAt): self
+    {
+        $this->startsAt = $startsAt;
+        
+        return $this;
+    }
+    
+    public function getStartsAt()
+    {
+        return $this->startsAt;
+    }
+    
+    public function setEndsAt(int $endsAt=null): self
+    {
+        $this->endsAt = $endsAt;       
+    }
+  
+    public function getEndsAt(): ?int
+    {
+        return $this->endsAt;
+    }
+    
+    public function incrementCounter(): self
+    {
+        $this->counter++;
+        
+        return $this; 
+    }
+  
+    public function getCounter(): int
+    {
+        return $this->counter;
+    }
+    
+    public function setMaxCalls(int $max=null): self
+    {
+        $this->maxCalls = $max;
+        
+        return $this;
+    }   
+  
+    public function getMaxCalls(): ?int
+    {
+        return $this->maxCalls;
     }
 }

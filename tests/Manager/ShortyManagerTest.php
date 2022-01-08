@@ -27,7 +27,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testEncode(): void
     {
-        $this->assertMatchesRegularExpression('/\w{6}/', $this->manager->encode());
+        $this->assertMatchesRegularExpression('/\w{6}/', $this->manager->encodeString());
     }
 
     public function testCreateEntity(): void
@@ -49,7 +49,7 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
         $result = $this->manager->save();
 
         $this->assertTrue($result->getIsUsed());
-	$this->assertMatchesRegularExpression('/\w{6}/', $result->getCode());
+		$this->assertMatchesRegularExpression('/\w{6}/', $result->getCode());
     }
 
     public function testSaveKnown(): void
@@ -91,6 +91,20 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($result->getIsUsed());
         $this->assertMatchesRegularExpression('/\w{6}/', $result->getCode());
+    }
+    
+    public function testUpdateCounter()
+    {
+    	$shortyEntity = new SHortyEntity();
+    	
+    	$this->repository->expects($this->once())
+            ->method('persist');
 
+        $this->repository->expects($this->once())
+            ->method('save');
+    	
+    	$result = $this->manager->updateCounter($shortyEntity);
+    	
+    	$this->assertEquals(1, $result->getCounter());
     }
 }
