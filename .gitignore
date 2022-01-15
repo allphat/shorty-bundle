@@ -47,5 +47,8 @@
 #backup files
 *~
 
+#PhpUnit
+.phpunit.result.cache
+
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~

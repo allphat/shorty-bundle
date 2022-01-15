@@ -35,10 +35,23 @@ class ShortyRepository extends ServiceEntityRepository
             return false;
         }
     }
+    
+    public function getByCode(string $code, bool $alllowSecureOnly): ?ShortyEntity
+    {
+        $query = $this->createQueryBuilder('sg');
+        $query->select('sg');
+        $query->andWhere('sg.code = :code');
+        $query->setParameter('code', $code);
+        if (!$allowSecureOnly) {
+            $query->orWhere('sg.code = :insecure_code');
+            $query->setParameter('insecure_code', str_replace('https','http', $code));        
+        }
+        
+        return $query->getQuery()->getSingleResult();
+    }
 
     public function findLast(): ?ShortyEntity
     {
-    	$entityManager = $this->getEntityManager();
         $query = $this->createQueryBuilder('sg');
         $query->select('sg');
         $query->setMaxResults(1);

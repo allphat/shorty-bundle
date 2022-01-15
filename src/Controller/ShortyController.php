@@ -25,20 +25,23 @@ class ShortyController extends AbstractController
      * Route("/{code}", name="allphat_shorty_redirect", requirements={"code"= "^[\w]{6}$"})
      * Method({"GET","HEAD"})
      */
-    /*public function redirectAction($code)
+    public function redirectAction(string $code)
     {
-        $short = $this->get('shorty.manager')->findByCode($code);
+        $short = $this->get('shorty.manager')->findByCode($code, $this->getParameter('allphat_shorty.allow_secure_only'));
 
         if (!$short) {
             throw $this->createNotFoundException('Oopps this link does does not exist');
         }
         
-        $this->get('shorty_manager')->updateCounter($short);
+        $allowMaxCalls = $this->getParameter('allphat_shorty.allow_max_calls');
+        if ($allowMaxCalls && $short->getCounter() >= $short->getMaxCalls()) {
+            throw $this->createNotFoundException('Oopps this link does does not exist anymore');
+        }
 
-        //@TODO create method to ckeck against options
+        $short = $this->get('shorty_manager')->updateCounter($short);
 
-        return $this->redirect($short->getUrl(), 301);
-    }*/
+        return $this->redirect($this->getParameter('allphat_shorty.shorty_host') . '/' . $short->getCode(), 301);
+    }
 
     /**
      * @Route("/", name="allphat_shorty_create", service="shorty.controller")
