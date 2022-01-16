@@ -44,45 +44,32 @@ class ShortyController extends AbstractController
     }
 
     /**
-     * @Route("/", name="allphat_shorty_create", service="shorty.controller")
-     * @Method({"POST"})
+     * @TODO gerer le cas ou le code genere est deja utilise
+     * @TODO gerer les templates
+     *
+     * @Route("/shorty/new", name="allphat_shorty_create", service="shorty.controller")
      */
-    public function createAction(): JsonResponse
+    public function new(): JsonResponse
     {
-        try {
+        $short = new ShortyEntity();
 
-            $short = $this->shortyManager->save();
+        $form = $this->createForm(ShortType::class, $task, this->getParameter('allphat_shorty'));
 
-            $response = [
-                $short->getCode()
-            ];
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $short = $form->getData();
+                
+            $this->get('shorty.manager')->createEntity($short);
 
-
-            return new JsonResponse(['code' => $response]);
-
-        } catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
-            return new JsonResponse($e->getMessage());
+            //return $this->redirectToRoute('task_success');
         }
+
+        return $this->renderForm('short/new.html.twig', [
+            'form' => $form,
+        ]);
+
+        //} catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+        //    return new JsonResponse($e->getMessage());
+        //}
     }
-
-    /**
-     * param array $params   [description]
-     */
-    //protected function checkOptions($params)
-    //{
-        /*$response['allow_lifetime'] = $this->getParameter('shorty.allow_lifetime');
-        if (isset($params['allow_lifetime'])) {
-            throw new \Exception('');
-        }
-
-        $response['allow_secure'] = $this->getParameter('shorty.allow_secure');
-        if (isset($params['allow_secure']) && is_null($params['allow_secure'])) {
-            throw new \Exception('secured url not allowed');
-        }
-
-        $response['allow_follow'] = $this->getParameter('shorty.allow_follow');
-        if (isset($params['allow_follow'])  && is_null($params['allow_follow'])) {
-            throw new \Exception('Redirection not allowed');
-        }*/
-    //}
 }

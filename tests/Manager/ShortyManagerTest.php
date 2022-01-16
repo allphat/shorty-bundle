@@ -32,7 +32,9 @@ class ShortyManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateEntity(): void
     {
-        $result = $this->manager->createEntity();
+        $shortyEntity = new ShortyEntity();
+
+        $result = $this->manager->createEntity($shortyEntity);
 
         $this->assertFalse($result->getIsUsed());
     }

@@ -1,4 +1,4 @@
-services:C
+services:
     shorty.repository:
         class: Allphat\Bundle\ShortyBundle\Repository\ShortyRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
@@ -9,10 +9,9 @@ services:C
         arguments: ["@shorty.repository"]
 
     shorty.controller:
-        class: Allphat\Bundle\ShortyBundle\Controller\ShortyController
-	
+        class: Allphat\Bundle\ShortyBundle\Controller\ShortyController	
 
     shorty.shorterner:
-	class: Allphat\Bundke\ShortyBundle\Shortener\Shortener
-	calls:
-            - method: generateRandomCode
+    class: Allphat\Bundke\ShortyBundle\Shortener\Shortener
+    calls:
+        - method: generateRandomCode
