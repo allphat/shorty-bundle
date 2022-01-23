@@ -23,9 +23,8 @@ class ShortyManager
 		return $this->shortyRepository->getByCode(['code' => $code, 'allow_secure_only' => $allow_secure_only]);
 	}
 
-	public function createEntity(): ShortyEntity
+	public function createEntity(ShortyEntity $short): ShortyEntity
 	{
-		$short = new ShortyEntity();
         $short->setCreatedAt((new \DateTime())->getTimestamp());
 		$short->setCode($this->encodeString());
 		$short->setIsUsed(false);

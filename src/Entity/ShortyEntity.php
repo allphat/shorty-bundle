@@ -3,6 +3,7 @@
 namespace Allphat\ShortyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -34,7 +35,7 @@ class ShortyEntity
     
     /**
      *
-     * @ORM\Column(name="code", type="string", nullable = false)
+     * @ORM\Column(name="code", type="string", nullable = false, unique=true)
      * @Assert\NotBlank()
      *
      * @var string
@@ -43,7 +44,7 @@ class ShortyEntity
     
     /**
      *
-     * @ORM\Column(name="source_url", type="string", nullable = false)
+     * @ORM\Column(name="source_url", type="string", nullable = false, unique=true)
      * @Assert\NotBlank()
      * @Assert\Url()
      *
@@ -69,7 +70,7 @@ class ShortyEntity
     private $createdAt;
     
     /**
-     * @ORM\Column(name="starts_at", type="integer", nullable=false)
+     * @ORM\Column(name="starts_at", type="integer", nullable=true)
      *
      * @var int
      */

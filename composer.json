@@ -15,13 +15,12 @@
         "php": ">=7.2",
         "doctrine/doctrine-bundle": "^2.0",
         "guzzlehttp/guzzle": "~6.0",
-        "symfony/symfony": "5.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/polyfill-apcu": "^1.0",
         "doctrine/orm": "^2.10"
     },
     "require-dev": {
-         "symfony/phpunit-bridge": "^3.4.26",
+        "symfony/phpunit-bridge": "^3.4.26",
         "phpunit/phpcov": "^8.2",
         "php-coveralls/php-coveralls": "^2.5",
         "phpstan/phpstan": "^1.3"
